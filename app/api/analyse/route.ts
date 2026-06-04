@@ -135,7 +135,7 @@ Return JSON only in this exact shape:
 
     const result = JSON.parse(content);
 
-    const value = getEstimatedCardValue(
+    const value = await getEstimatedCardValue(
       result.card_name || cardName,
       result.set_name || setName,
       result.card_number || cardNumber,
