@@ -1,21 +1,35 @@
-export default function Logo() {
-  return (
-    <div className="flex items-center gap-3">
-      <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl border border-violet-400/40 bg-violet-500/10 shadow-[0_0_35px_rgba(139,92,246,0.45)]">
-        <div className="absolute h-6 w-6 rotate-45 rounded-sm border border-blue-300/70" />
-        <span className="relative text-sm font-black tracking-tight text-white">
-          N
-        </span>
-      </div>
+import Logo from "@/components/Logo";
 
-      <div className="leading-none">
-        <div className="text-lg font-black tracking-[0.18em] text-white">
-          NIFTY
+export default function Navbar() {
+  return (
+    <nav className="fixed top-0 z-50 w-full border-b border-slate-800/50 bg-[#050816]/80 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <a href="/">
+          <Logo />
+        </a>
+
+        <div className="hidden gap-8 md:flex">
+          <a href="/" className="text-slate-300 hover:text-white">
+            Home
+          </a>
+          <a href="/#features" className="text-slate-300 hover:text-white">
+            Features
+          </a>
+          <a href="/#platform" className="text-slate-300 hover:text-white">
+            Platform
+          </a>
+          <a href="/#pricing" className="text-slate-300 hover:text-white">
+            Pricing
+          </a>
         </div>
-        <div className="text-[10px] font-semibold tracking-[0.45em] text-violet-300">
-          INC
-        </div>
+
+        <a
+          href="/grader"
+          className="rounded-lg bg-violet-600 px-4 py-2 font-medium text-white hover:bg-violet-500"
+        >
+          Start Free
+        </a>
       </div>
-    </div>
+    </nav>
   );
 }

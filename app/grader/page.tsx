@@ -1,6 +1,7 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
+import { supabase } from "@/lib/supabase";
 import { useState } from "react";
 
 type AnalysisResult = {
@@ -37,9 +38,14 @@ type AnalysisResult = {
 };
 
 function getDecisionColour(decision: string) {
-  if (decision === "GRADE") return "border-green-500/30 bg-green-500/10 text-green-300";
-  if (decision === "DO NOT GRADE")
+  if (decision === "GRADE") {
+    return "border-green-500/30 bg-green-500/10 text-green-300";
+  }
+
+  if (decision === "DO NOT GRADE") {
     return "border-red-500/30 bg-red-500/10 text-red-300";
+  }
+
   return "border-yellow-500/30 bg-yellow-500/10 text-yellow-300";
 }
 
@@ -58,6 +64,14 @@ export default function GraderPage() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState("");
 
+  const [helpful, setHelpful] = useState<boolean | null>(null);
+  const [identificationCorrect, setIdentificationCorrect] =
+    useState<boolean | null>(null);
+  const [userGrade, setUserGrade] = useState("");
+  const [comment, setComment] = useState("");
+  const [feedbackMessage, setFeedbackMessage] = useState("");
+  const [feedbackLoading, setFeedbackLoading] = useState(false);
+
   function handleImage(file: File, side: "front" | "back") {
     const previewUrl = URL.createObjectURL(file);
 
@@ -73,6 +87,11 @@ export default function GraderPage() {
   async function analyseCard() {
     setError("");
     setResult(null);
+    setFeedbackMessage("");
+    setHelpful(null);
+    setIdentificationCorrect(null);
+    setUserGrade("");
+    setComment("");
 
     if (!frontImage || !backImage) {
       setError("Please upload both front and back images.");
@@ -109,6 +128,41 @@ export default function GraderPage() {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function submitFeedback() {
+    if (!result) return;
+
+    setFeedbackMessage("");
+    setFeedbackLoading(true);
+
+    try {
+      const { error: feedbackError } = await supabase.from("feedback").insert({
+        card_name: result.card_name,
+        set_name: result.set_name,
+        card_number: result.card_number,
+        predicted_grade: result.predicted_grade,
+        psa_10_probability: result.psa_10_probability,
+        helpful,
+        identification_correct: identificationCorrect,
+        user_grade: userGrade,
+        comment,
+      });
+
+      if (feedbackError) {
+        throw feedbackError;
+      }
+
+      setFeedbackMessage("Thank you — your feedback has been saved.");
+    } catch (err) {
+      setFeedbackMessage(
+        err instanceof Error
+          ? `Feedback error: ${err.message}`
+          : "Could not save feedback."
+      );
+    } finally {
+      setFeedbackLoading(false);
     }
   }
 
@@ -462,6 +516,113 @@ export default function GraderPage() {
                   <p className="text-sm text-slate-300">
                     {result.recommendation}
                   </p>
+                </div>
+
+                <div className="mt-6 rounded-2xl border border-green-500/30 bg-green-500/10 p-5">
+                  <p className="mb-3 text-sm uppercase tracking-[0.25em] text-green-300">
+                    Help Improve Nifty
+                  </p>
+
+                  <div className="space-y-5">
+                    <div>
+                      <p className="mb-2 text-sm text-slate-300">
+                        Was this analysis helpful?
+                      </p>
+                      <div className="flex gap-3">
+                        <button
+                          onClick={() => setHelpful(true)}
+                          className={`rounded-xl border px-4 py-2 text-sm ${
+                            helpful === true
+                              ? "border-green-400 bg-green-500/20"
+                              : "border-slate-700 bg-slate-950/40"
+                          }`}
+                        >
+                          👍 Helpful
+                        </button>
+                        <button
+                          onClick={() => setHelpful(false)}
+                          className={`rounded-xl border px-4 py-2 text-sm ${
+                            helpful === false
+                              ? "border-red-400 bg-red-500/20"
+                              : "border-slate-700 bg-slate-950/40"
+                          }`}
+                        >
+                          👎 Not Helpful
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="mb-2 text-sm text-slate-300">
+                        Was the card identified correctly?
+                      </p>
+                      <div className="flex gap-3">
+                        <button
+                          onClick={() => setIdentificationCorrect(true)}
+                          className={`rounded-xl border px-4 py-2 text-sm ${
+                            identificationCorrect === true
+                              ? "border-green-400 bg-green-500/20"
+                              : "border-slate-700 bg-slate-950/40"
+                          }`}
+                        >
+                          Yes
+                        </button>
+                        <button
+                          onClick={() => setIdentificationCorrect(false)}
+                          className={`rounded-xl border px-4 py-2 text-sm ${
+                            identificationCorrect === false
+                              ? "border-red-400 bg-red-500/20"
+                              : "border-slate-700 bg-slate-950/40"
+                          }`}
+                        >
+                          No
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="mb-2 block text-sm text-slate-300">
+                        What grade do you think it is?
+                      </label>
+                      <select
+                        value={userGrade}
+                        onChange={(e) => setUserGrade(e.target.value)}
+                        className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none focus:border-green-400"
+                      >
+                        <option value="">Select a grade</option>
+                        <option value="PSA 10">PSA 10</option>
+                        <option value="PSA 9">PSA 9</option>
+                        <option value="PSA 8">PSA 8</option>
+                        <option value="PSA 7 or below">PSA 7 or below</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="mb-2 block text-sm text-slate-300">
+                        Comments
+                      </label>
+                      <textarea
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        placeholder="Example: It got the card right, but I think the grade is too harsh."
+                        className="min-h-28 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none placeholder:text-slate-600 focus:border-green-400"
+                      />
+                    </div>
+
+                    <button
+                      onClick={submitFeedback}
+                      disabled={feedbackLoading}
+                      className="w-full rounded-xl bg-green-600 px-5 py-3 font-bold text-white hover:bg-green-500 disabled:opacity-60"
+                    >
+                      {feedbackLoading ? "Saving..." : "Submit Feedback"}
+                    </button>
+
+                    {feedbackMessage && (
+                      <p className="text-sm text-slate-300">
+                        {feedbackMessage}
+                      </p>
+                    )}
+                  </div>
                 </div>
 
                 <p className="mt-6 text-xs leading-relaxed text-slate-500">
