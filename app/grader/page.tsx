@@ -70,7 +70,7 @@ function saveScanToHistory(result: AnalysisResult) {
 }
 
 async function saveScanToSupabase(result: AnalysisResult) {
-  await supabase.from("scans").insert({
+  const { error } = await supabase.from("scans").insert({
     card_name: result.card_name,
     set_name: result.set_name,
     card_number: result.card_number,
@@ -78,6 +78,11 @@ async function saveScanToSupabase(result: AnalysisResult) {
     psa_10_probability: result.psa_10_probability,
     grade_recommendation: result.value?.grade_recommendation,
   });
+
+  if (error) {
+    alert("Scan save error: " + error.message);
+    console.error(error);
+  }
 }
 
 export default function GraderPage() {
