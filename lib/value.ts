@@ -45,6 +45,13 @@ function extractNumber(value: string) {
   return match ? Number(match[0]) : 0;
 }
 
+function normalise(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "")
+    .replace(/s$/, "");
+}
+
 function calculateDecision(
   predictedGrade: string,
   psa10Probability: string,
@@ -81,7 +88,8 @@ function calculateDecision(
 
   if (predicted.includes("10") || expectedProfit > 20 || psa10Chance >= 60) {
     return {
-      expected_profit: expectedProfit >= 0 ? `+£${expectedProfit}` : `-£${Math.abs(expectedProfit)}`,
+      expected_profit:
+        expectedProfit >= 0 ? `+£${expectedProfit}` : `-£${Math.abs(expectedProfit)}`,
       grade_recommendation: "GRADE",
       decision_title: "GRADE THIS CARD",
       decision_reason:
@@ -91,7 +99,8 @@ function calculateDecision(
 
   if (predicted.includes("8") || expectedProfit < -10 || psa10Chance <= 20) {
     return {
-      expected_profit: expectedProfit >= 0 ? `+£${expectedProfit}` : `-£${Math.abs(expectedProfit)}`,
+      expected_profit:
+        expectedProfit >= 0 ? `+£${expectedProfit}` : `-£${Math.abs(expectedProfit)}`,
       grade_recommendation: "DO NOT GRADE",
       decision_title: "DO NOT GRADE YET",
       decision_reason:
@@ -100,12 +109,43 @@ function calculateDecision(
   }
 
   return {
-    expected_profit: expectedProfit >= 0 ? `+£${expectedProfit}` : `-£${Math.abs(expectedProfit)}`,
+    expected_profit:
+      expectedProfit >= 0 ? `+£${expectedProfit}` : `-£${Math.abs(expectedProfit)}`,
     grade_recommendation: "REVIEW",
     decision_title: "REVIEW BEFORE GRADING",
     decision_reason:
       "This card may be worth grading, but the expected return is close enough that recent sold listings should be checked first.",
   };
+}
+
+async function findValueRow(
+  cardName: string,
+  setName: string,
+  cardNumber: string
+): Promise<CardValueRow | null> {
+  const { data } = await supabase.from("card_values").select("*");
+
+  if (!data) return null;
+
+  const cleanCardName = normalise(cardName);
+  const cleanSetName = normalise(setName);
+  const cleanCardNumber = normalise(cardNumber);
+
+  const rows = data as CardValueRow[];
+
+  return (
+    rows.find((row) => {
+      const rowCardName = normalise(row.card_name || "");
+      const rowSetName = normalise(row.set_name || "");
+      const rowCardNumber = normalise(row.card_number || "");
+
+      return (
+        rowCardName === cleanCardName &&
+        rowSetName === cleanSetName &&
+        rowCardNumber === cleanCardNumber
+      );
+    }) || null
+  );
 }
 
 export async function getEstimatedCardValue(
@@ -119,13 +159,7 @@ export async function getEstimatedCardValue(
   const cleanSetName = setName?.trim() || "";
   const cleanCardNumber = cardNumber?.trim() || "";
 
-  const { data } = await supabase
-    .from("card_values")
-    .select("*")
-    .ilike("card_name", cleanCardName)
-    .ilike("set_name", cleanSetName)
-    .ilike("card_number", cleanCardNumber)
-    .maybeSingle<CardValueRow>();
+  const data = await findValueRow(cleanCardName, cleanSetName, cleanCardNumber);
 
   const decision = calculateDecision(
     predictedGrade,
