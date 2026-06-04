@@ -2,10 +2,6 @@ import OpenAI from "openai";
 import { NextResponse } from "next/server";
 import { getEstimatedCardValue } from "@/lib/value";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
 async function fileToDataUrl(file: File) {
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
@@ -15,6 +11,17 @@ async function fileToDataUrl(file: File) {
 
 export async function POST(request: Request) {
   try {
+    if (!process.env.OPENAI_API_KEY) {
+      return NextResponse.json(
+        { error: "OpenAI API key is missing on the server." },
+        { status: 500 }
+      );
+    }
+
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+
     const formData = await request.formData();
 
     const cardName = formData.get("cardName")?.toString() || "";
