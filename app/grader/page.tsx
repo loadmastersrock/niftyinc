@@ -69,6 +69,17 @@ function saveScanToHistory(result: AnalysisResult) {
   localStorage.setItem("nifty_scan_history", JSON.stringify(updatedHistory));
 }
 
+async function saveScanToSupabase(result: AnalysisResult) {
+  await supabase.from("scans").insert({
+    card_name: result.card_name,
+    set_name: result.set_name,
+    card_number: result.card_number,
+    predicted_grade: result.predicted_grade,
+    psa_10_probability: result.psa_10_probability,
+    grade_recommendation: result.value?.grade_recommendation,
+  });
+}
+
 export default function GraderPage() {
   const [cardName, setCardName] = useState("");
   const [setName, setSetName] = useState("");
@@ -141,6 +152,7 @@ export default function GraderPage() {
 
       setResult(data);
       saveScanToHistory(data);
+      await saveScanToSupabase(data);
 
       if (data.card_name) setCardName(data.card_name);
       if (data.set_name) setSetName(data.set_name);
