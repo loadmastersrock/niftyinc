@@ -12,14 +12,14 @@ export default function Navbar() {
           <a href="/" className="text-slate-300 hover:text-white">
             Home
           </a>
+          <a href="/grader" className="text-slate-300 hover:text-white">
+            Grader
+          </a>
+          <a href="/history" className="text-slate-300 hover:text-white">
+            History
+          </a>
           <a href="/#features" className="text-slate-300 hover:text-white">
             Features
-          </a>
-          <a href="/#platform" className="text-slate-300 hover:text-white">
-            Platform
-          </a>
-          <a href="/#pricing" className="text-slate-300 hover:text-white">
-            Pricing
           </a>
         </div>
 

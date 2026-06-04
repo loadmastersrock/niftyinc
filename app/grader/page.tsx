@@ -49,6 +49,26 @@ function getDecisionColour(decision: string) {
   return "border-yellow-500/30 bg-yellow-500/10 text-yellow-300";
 }
 
+function saveScanToHistory(result: AnalysisResult) {
+  const existing = localStorage.getItem("nifty_scan_history");
+  const history = existing ? JSON.parse(existing) : [];
+
+  const newItem = {
+    id: crypto.randomUUID(),
+    card_name: result.card_name,
+    set_name: result.set_name,
+    card_number: result.card_number,
+    predicted_grade: result.predicted_grade,
+    psa_10_probability: result.psa_10_probability,
+    grade_recommendation: result.value.grade_recommendation,
+    created_at: new Date().toISOString(),
+  };
+
+  const updatedHistory = [newItem, ...history].slice(0, 20);
+
+  localStorage.setItem("nifty_scan_history", JSON.stringify(updatedHistory));
+}
+
 export default function GraderPage() {
   const [cardName, setCardName] = useState("");
   const [setName, setSetName] = useState("");
@@ -120,6 +140,7 @@ export default function GraderPage() {
       }
 
       setResult(data);
+      saveScanToHistory(data);
 
       if (data.card_name) setCardName(data.card_name);
       if (data.set_name) setSetName(data.set_name);
@@ -324,6 +345,13 @@ export default function GraderPage() {
             >
               {loading ? "Identifying & Analysing..." : "Analyse Card"}
             </button>
+
+            <a
+              href="/history"
+              className="mt-4 block text-center text-sm text-slate-400 hover:text-white"
+            >
+              View scan history
+            </a>
           </div>
 
           <aside className="rounded-3xl border border-slate-800 bg-slate-900/40 p-6 backdrop-blur-xl">
