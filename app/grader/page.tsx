@@ -4,6 +4,24 @@ import Navbar from "@/components/Navbar";
 import { supabase } from "@/lib/supabase";
 import { useState } from "react";
 
+type EbaySoldResult = {
+  source: "cache" | "soldcomps";
+  average_price: number | null;
+  median_price: number | null;
+  lowest_price: number | null;
+  highest_price: number | null;
+  sales_count: number;
+  currency: string;
+  items: {
+    title: string;
+    soldPrice: string;
+    soldCurrency: string;
+    shippingPrice: string;
+    endedAt: string;
+    url: string;
+  }[];
+};
+
 type AnalysisResult = {
   card_name: string;
   set_name: string;
@@ -90,6 +108,12 @@ async function saveScanToSupabase(result: AnalysisResult) {
   }
 }
 
+function formatEbayPrice(value: number | null, currency: string) {
+  if (value === null) return "N/A";
+  const symbol = currency === "GBP" ? "£" : currency === "USD" ? "$" : "";
+  return `${symbol}${value.toFixed(2)}`;
+}
+
 export default function GraderPage() {
   const [cardName, setCardName] = useState("");
   const [setName, setSetName] = useState("");
@@ -104,6 +128,10 @@ export default function GraderPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState("");
+
+  const [ebayLoading, setEbayLoading] = useState(false);
+  const [ebayError, setEbayError] = useState("");
+  const [ebayResult, setEbayResult] = useState<EbaySoldResult | null>(null);
 
   const [helpful, setHelpful] = useState<boolean | null>(null);
   const [identificationCorrect, setIdentificationCorrect] =
@@ -128,6 +156,8 @@ export default function GraderPage() {
   async function analyseCard() {
     setError("");
     setResult(null);
+    setEbayResult(null);
+    setEbayError("");
     setFeedbackMessage("");
     setHelpful(null);
     setIdentificationCorrect(null);
@@ -171,6 +201,58 @@ export default function GraderPage() {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function checkEbaySoldPrices() {
+    if (!result) return;
+
+    const todayKey = `nifty_ebay_lookup_${new Date()
+      .toISOString()
+      .slice(0, 10)}`;
+
+    const alreadyUsedToday = localStorage.getItem(todayKey);
+
+    if (alreadyUsedToday && !ebayResult) {
+      setEbayError(
+        "Free users get one fresh eBay sold-price lookup per day. Cached results may still appear when available."
+      );
+      return;
+    }
+
+    setEbayLoading(true);
+    setEbayError("");
+
+    try {
+      const response = await fetch("/api/ebay-sold", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cardName: result.card_name,
+          setName: result.set_name,
+          cardNumber: result.card_number,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "eBay sold lookup failed.");
+      }
+
+      setEbayResult(data);
+
+      if (data.source === "soldcomps") {
+        localStorage.setItem(todayKey, "true");
+      }
+    } catch (err) {
+      setEbayError(
+        err instanceof Error ? err.message : "Could not check eBay sold prices."
+      );
+    } finally {
+      setEbayLoading(false);
     }
   }
 
@@ -555,6 +637,100 @@ export default function GraderPage() {
                   <p className="mt-4 text-sm text-slate-300">
                     {result.value.value_summary}
                   </p>
+
+                  <button
+                    onClick={checkEbaySoldPrices}
+                    disabled={ebayLoading}
+                    className="mt-5 w-full rounded-xl bg-blue-600 px-5 py-3 font-bold text-white hover:bg-blue-500 disabled:opacity-60"
+                  >
+                    {ebayLoading
+                      ? "Checking eBay Sold Prices..."
+                      : "Check Real eBay Sold Prices"}
+                  </button>
+
+                  {ebayError && (
+                    <div className="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-200">
+                      {ebayError}
+                    </div>
+                  )}
+
+                  {ebayResult && (
+                    <div className="mt-5 rounded-2xl border border-blue-400/20 bg-slate-950/40 p-4">
+                      <p className="mb-3 text-xs uppercase tracking-[0.25em] text-blue-300">
+                        eBay UK Sold Results{" "}
+                        {ebayResult.source === "cache" ? "(Cached)" : "(Live)"}
+                      </p>
+
+                      <div className="space-y-3">
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">Average</span>
+                          <span className="font-bold text-white">
+                            {formatEbayPrice(
+                              ebayResult.average_price,
+                              ebayResult.currency
+                            )}
+                          </span>
+                        </div>
+
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">Median</span>
+                          <span className="font-bold text-white">
+                            {formatEbayPrice(
+                              ebayResult.median_price,
+                              ebayResult.currency
+                            )}
+                          </span>
+                        </div>
+
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">Low / High</span>
+                          <span className="font-bold text-white">
+                            {formatEbayPrice(
+                              ebayResult.lowest_price,
+                              ebayResult.currency
+                            )}{" "}
+                            -{" "}
+                            {formatEbayPrice(
+                              ebayResult.highest_price,
+                              ebayResult.currency
+                            )}
+                          </span>
+                        </div>
+
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">Sales Used</span>
+                          <span className="font-bold text-white">
+                            {ebayResult.sales_count}
+                          </span>
+                        </div>
+                      </div>
+
+                      {ebayResult.items.length > 0 && (
+                        <div className="mt-5 space-y-3">
+                          <p className="text-sm font-bold text-white">
+                            Recent Sold Listings
+                          </p>
+
+                          {ebayResult.items.slice(0, 5).map((item, index) => (
+                            <a
+                              key={`${item.title}-${index}`}
+                              href={item.url || "#"}
+                              target="_blank"
+                              className="block rounded-xl border border-slate-800 bg-slate-900/60 p-3 hover:border-blue-400/40"
+                            >
+                              <p className="line-clamp-2 text-sm text-white">
+                                {item.title}
+                              </p>
+                              <p className="mt-2 text-sm font-bold text-blue-300">
+                                {item.soldCurrency === "GBP" ? "£" : ""}
+                                {item.soldPrice}
+                              </p>
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
 
                   {marketSources.length > 0 && (
                     <div className="mt-5 rounded-2xl border border-blue-400/20 bg-slate-950/40 p-4">
