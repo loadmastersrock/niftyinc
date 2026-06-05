@@ -657,9 +657,14 @@ export default function GraderPage() {
                   {ebayResult && (
                     <div className="mt-5 rounded-2xl border border-blue-400/20 bg-slate-950/40 p-4">
                       <p className="mb-3 text-xs uppercase tracking-[0.25em] text-blue-300">
-                        eBay UK Sold Results{" "}
-                        {ebayResult.source === "cache" ? "(Cached)" : "(Live)"}
-                      </p>
+  eBay UK Sold Results
+</p>
+
+<p className="mb-4 rounded-xl border border-blue-400/20 bg-blue-500/10 p-3 text-sm text-blue-100">
+  {ebayResult.source === "cache"
+    ? "Using recent saved eBay sold data — no new SoldComps credit was used."
+    : "Live SoldComps lookup used — this result has now been saved for future users."}
+</p>
 
                       <div className="space-y-3">
                         <div className="flex justify-between">
