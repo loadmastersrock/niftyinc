@@ -30,6 +30,18 @@ type AnalysisResult = {
   rarity: string;
   era: string;
   identification_confidence: string;
+    photo_quality: {
+    overall: string;
+    sharpness: string;
+    glare: string;
+    lighting: string;
+    card_visibility: string;
+    corners_visible: string;
+    front_quality: string;
+    back_quality: string;
+    retake_recommended: boolean;
+    photo_notes: string[];
+  };
   predicted_grade: string;
   psa_10_probability: string;
   confidence: string;
@@ -40,6 +52,7 @@ type AnalysisResult = {
     surface: string;
   };
   detected_issues: string[];
+  why_not_psa_10: string;
   recommendation: string;
   disclaimer: string;
   value: {
@@ -557,7 +570,54 @@ export default function GraderPage() {
                     </div>
                   </div>
                 </div>
+<div className="mb-6 rounded-2xl border border-orange-500/30 bg-orange-500/10 p-5">
+  <p className="mb-3 text-sm uppercase tracking-[0.25em] text-orange-300">
+    Photo Quality
+  </p>
 
+  <div className="space-y-3">
+    <div className="flex justify-between">
+      <span className="text-slate-400">Overall</span>
+      <span className="font-bold text-white">
+        {result.photo_quality?.overall || "Not assessed"}
+      </span>
+    </div>
+
+    <div className="flex justify-between">
+      <span className="text-slate-400">Sharpness</span>
+      <span>{result.photo_quality?.sharpness || "N/A"}</span>
+    </div>
+
+    <div className="flex justify-between">
+      <span className="text-slate-400">Glare</span>
+      <span>{result.photo_quality?.glare || "N/A"}</span>
+    </div>
+
+    <div className="flex justify-between">
+      <span className="text-slate-400">Lighting</span>
+      <span>{result.photo_quality?.lighting || "N/A"}</span>
+    </div>
+
+    <div className="flex justify-between">
+      <span className="text-slate-400">Corners Visible</span>
+      <span>{result.photo_quality?.corners_visible || "N/A"}</span>
+    </div>
+  </div>
+
+  {result.photo_quality?.retake_recommended && (
+    <div className="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-200">
+      Retake recommended before trusting this grade estimate.
+    </div>
+  )}
+
+  {result.photo_quality?.photo_notes?.length > 0 && (
+    <ul className="mt-4 space-y-2 text-sm text-slate-300">
+      {result.photo_quality.photo_notes.map((note) => (
+        <li key={note}>• {note}</li>
+      ))}
+    </ul>
+  )}
+</div>
                 <p className="mb-4 text-sm uppercase tracking-[0.25em] text-violet-400">
                   Grade Estimate
                 </p>
@@ -774,7 +834,14 @@ export default function GraderPage() {
                     )}
                   </ul>
                 </div>
-
+{result.why_not_psa_10 && (
+  <div className="mt-6 rounded-2xl border border-yellow-500/30 bg-yellow-500/10 p-5">
+    <h3 className="mb-3 font-bold text-yellow-200">
+      Why This May Not Be PSA 10
+    </h3>
+    <p className="text-sm text-slate-300">{result.why_not_psa_10}</p>
+  </div>
+)}
                 <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-950/50 p-5">
                   <h3 className="mb-2 font-bold">AI Recommendation</h3>
                   <p className="text-sm text-slate-300">
