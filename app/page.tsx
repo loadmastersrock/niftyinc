@@ -97,13 +97,11 @@ export default function Home() {
       <p className="text-3xl font-black text-green-300">
         AI + Market Data
       </p>
-      <p className="mt-2 text-sm text-slate-300">
-        Grade & Value Analysis
-      </p>
+      
     </div>
   </div>
 </div>
-            <div className="flex flex-col gap-4 sm:flex-row">
+            <div className="mt-12 flex gap-4">
               <a
                 href="/grader"
                 className="rounded-xl bg-violet-600 px-6 py-4 text-center font-semibold text-white hover:bg-violet-500"
