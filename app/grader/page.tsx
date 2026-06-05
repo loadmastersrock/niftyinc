@@ -1,9 +1,9 @@
 "use client";
 
+import AnalysisTerminal from "@/components/AnalysisTerminal";
 import Navbar from "@/components/Navbar";
 import { supabase } from "@/lib/supabase";
 import { useState } from "react";
-import AnalysisTerminal from "@/components/AnalysisTerminal";
 
 type EbaySoldResult = {
   source: "cache" | "soldcomps";
@@ -31,7 +31,7 @@ type AnalysisResult = {
   rarity: string;
   era: string;
   identification_confidence: string;
-    photo_quality: {
+  photo_quality: {
     overall: string;
     sharpness: string;
     glare: string;
@@ -103,7 +103,6 @@ function saveScanToHistory(result: AnalysisResult) {
   };
 
   const updatedHistory = [newItem, ...history].slice(0, 20);
-
   localStorage.setItem("nifty_scan_history", JSON.stringify(updatedHistory));
 }
 
@@ -219,50 +218,30 @@ export default function GraderPage() {
   }
 
   async function checkEbaySoldPrices() {
-  if (!result) return;
+    if (!result) return;
 
-  const todayKey = `nifty_ebay_lookup_${new Date()
-    .toISOString()
-    .slice(0, 10)}`;
+    const todayKey = `nifty_ebay_lookup_${new Date()
+      .toISOString()
+      .slice(0, 10)}`;
 
-  const alreadyUsedToday = localStorage.getItem(todayKey);
+    const alreadyUsedToday = localStorage.getItem(todayKey);
 
-  setEbayLoading(true);
-  setEbayError("");
+    setEbayLoading(true);
+    setEbayError("");
 
-  try {
-    const response = await fetch("/api/ebay-sold", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        cardName: result.card_name,
-        setName: result.set_name,
-        cardNumber: result.card_number,
-        allowFreshLookup: !alreadyUsedToday,
-      }),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || "eBay sold lookup failed.");
-    }
-
-    setEbayResult(data);
-
-    if (data.source === "soldcomps") {
-      localStorage.setItem(todayKey, "true");
-    }
-  } catch (err) {
-    setEbayError(
-      err instanceof Error ? err.message : "Could not check eBay sold prices."
-    );
-  } finally {
-    setEbayLoading(false);
-  }
-}
+    try {
+      const response = await fetch("/api/ebay-sold", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cardName: result.card_name,
+          setName: result.set_name,
+          cardNumber: result.card_number,
+          allowFreshLookup: !alreadyUsedToday,
+        }),
+      });
 
       const data = await response.json();
 
@@ -277,7 +256,9 @@ export default function GraderPage() {
       }
     } catch (err) {
       setEbayError(
-        err instanceof Error ? err.message : "Could not check eBay sold prices."
+        err instanceof Error
+          ? err.message
+          : "Could not check eBay sold prices."
       );
     } finally {
       setEbayLoading(false);
@@ -486,7 +467,9 @@ export default function GraderPage() {
             >
               {loading ? "Identifying & Analysing..." : "Analyse Card"}
             </button>
-{loading && <AnalysisTerminal />}
+
+            {loading && <AnalysisTerminal />}
+
             <a
               href="/history"
               className="mt-4 block text-center text-sm text-slate-400 hover:text-white"
@@ -503,13 +486,13 @@ export default function GraderPage() {
                 <div className="space-y-3">
                   {[
                     "Card identification",
-                    "Set and card number",
+                    "Photo quality",
                     "Centering",
                     "Corner wear",
                     "Edge wear",
                     "Surface marks",
                     "Whitening",
-                    "Print lines",
+                    "Value estimate",
                   ].map((item) => (
                     <div
                       key={item}
@@ -521,14 +504,6 @@ export default function GraderPage() {
                       <span className="text-slate-300">{item}</span>
                     </div>
                   ))}
-                </div>
-
-                <div className="mt-8 rounded-2xl border border-violet-500/30 bg-violet-500/10 p-5">
-                  <h3 className="mb-2 font-bold">Photo Tips</h3>
-                  <p className="text-sm text-slate-300">
-                    Use natural light, avoid glare, keep the card flat, and make
-                    sure the card name and number are readable.
-                  </p>
                 </div>
               </>
             ) : (
@@ -585,54 +560,58 @@ export default function GraderPage() {
                     </div>
                   </div>
                 </div>
-<div className="mb-6 rounded-2xl border border-orange-500/30 bg-orange-500/10 p-5">
-  <p className="mb-3 text-sm uppercase tracking-[0.25em] text-orange-300">
-    Photo Quality
-  </p>
 
-  <div className="space-y-3">
-    <div className="flex justify-between">
-      <span className="text-slate-400">Overall</span>
-      <span className="font-bold text-white">
-        {result.photo_quality?.overall || "Not assessed"}
-      </span>
-    </div>
+                <div className="mb-6 rounded-2xl border border-orange-500/30 bg-orange-500/10 p-5">
+                  <p className="mb-3 text-sm uppercase tracking-[0.25em] text-orange-300">
+                    Photo Quality
+                  </p>
 
-    <div className="flex justify-between">
-      <span className="text-slate-400">Sharpness</span>
-      <span>{result.photo_quality?.sharpness || "N/A"}</span>
-    </div>
+                  <div className="space-y-3">
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Overall</span>
+                      <span className="font-bold text-white">
+                        {result.photo_quality?.overall || "Not assessed"}
+                      </span>
+                    </div>
 
-    <div className="flex justify-between">
-      <span className="text-slate-400">Glare</span>
-      <span>{result.photo_quality?.glare || "N/A"}</span>
-    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Sharpness</span>
+                      <span>{result.photo_quality?.sharpness || "N/A"}</span>
+                    </div>
 
-    <div className="flex justify-between">
-      <span className="text-slate-400">Lighting</span>
-      <span>{result.photo_quality?.lighting || "N/A"}</span>
-    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Glare</span>
+                      <span>{result.photo_quality?.glare || "N/A"}</span>
+                    </div>
 
-    <div className="flex justify-between">
-      <span className="text-slate-400">Corners Visible</span>
-      <span>{result.photo_quality?.corners_visible || "N/A"}</span>
-    </div>
-  </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Lighting</span>
+                      <span>{result.photo_quality?.lighting || "N/A"}</span>
+                    </div>
 
-  {result.photo_quality?.retake_recommended && (
-    <div className="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-200">
-      Retake recommended before trusting this grade estimate.
-    </div>
-  )}
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Corners Visible</span>
+                      <span>
+                        {result.photo_quality?.corners_visible || "N/A"}
+                      </span>
+                    </div>
+                  </div>
 
-  {result.photo_quality?.photo_notes?.length > 0 && (
-    <ul className="mt-4 space-y-2 text-sm text-slate-300">
-      {result.photo_quality.photo_notes.map((note) => (
-        <li key={note}>• {note}</li>
-      ))}
-    </ul>
-  )}
-</div>
+                  {result.photo_quality?.retake_recommended && (
+                    <div className="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-200">
+                      Retake recommended before trusting this grade estimate.
+                    </div>
+                  )}
+
+                  {result.photo_quality?.photo_notes?.length > 0 && (
+                    <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                      {result.photo_quality.photo_notes.map((note) => (
+                        <li key={note}>• {note}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+
                 <p className="mb-4 text-sm uppercase tracking-[0.25em] text-violet-400">
                   Grade Estimate
                 </p>
@@ -732,14 +711,14 @@ export default function GraderPage() {
                   {ebayResult && (
                     <div className="mt-5 rounded-2xl border border-blue-400/20 bg-slate-950/40 p-4">
                       <p className="mb-3 text-xs uppercase tracking-[0.25em] text-blue-300">
-  eBay UK Sold Results
-</p>
+                        eBay UK Sold Results
+                      </p>
 
-<p className="mb-4 rounded-xl border border-blue-400/20 bg-blue-500/10 p-3 text-sm text-blue-100">
-  {ebayResult.source === "cache"
-    ? "Using recent saved eBay sold data — no new credit was used."
-    : "Live SoldComps lookup used — this result has now been saved for future users."}
-</p>
+                      <p className="mb-4 rounded-xl border border-blue-400/20 bg-blue-500/10 p-3 text-sm text-blue-100">
+                        {ebayResult.source === "cache"
+                          ? "Using recent saved eBay sold data — no new SoldComps credit was used."
+                          : "Live SoldComps lookup used — this result has now been saved for future users."}
+                      </p>
 
                       <div className="space-y-3">
                         <div className="flex justify-between">
@@ -849,14 +828,18 @@ export default function GraderPage() {
                     )}
                   </ul>
                 </div>
-{result.why_not_psa_10 && (
-  <div className="mt-6 rounded-2xl border border-yellow-500/30 bg-yellow-500/10 p-5">
-    <h3 className="mb-3 font-bold text-yellow-200">
-      Why This May Not Be PSA 10
-    </h3>
-    <p className="text-sm text-slate-300">{result.why_not_psa_10}</p>
-  </div>
-)}
+
+                {result.why_not_psa_10 && (
+                  <div className="mt-6 rounded-2xl border border-yellow-500/30 bg-yellow-500/10 p-5">
+                    <h3 className="mb-3 font-bold text-yellow-200">
+                      Why This May Not Be PSA 10
+                    </h3>
+                    <p className="text-sm text-slate-300">
+                      {result.why_not_psa_10}
+                    </p>
+                  </div>
+                )}
+
                 <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-950/50 p-5">
                   <h3 className="mb-2 font-bold">AI Recommendation</h3>
                   <p className="text-sm text-slate-300">
