@@ -219,36 +219,50 @@ export default function GraderPage() {
   }
 
   async function checkEbaySoldPrices() {
-    if (!result) return;
+  if (!result) return;
 
-    const todayKey = `nifty_ebay_lookup_${new Date()
-      .toISOString()
-      .slice(0, 10)}`;
+  const todayKey = `nifty_ebay_lookup_${new Date()
+    .toISOString()
+    .slice(0, 10)}`;
 
-    const alreadyUsedToday = localStorage.getItem(todayKey);
+  const alreadyUsedToday = localStorage.getItem(todayKey);
 
-    if (alreadyUsedToday && !ebayResult) {
-      setEbayError(
-        "Free users get one fresh eBay sold-price lookup per day. Cached results may still appear when available."
-      );
-      return;
+  setEbayLoading(true);
+  setEbayError("");
+
+  try {
+    const response = await fetch("/api/ebay-sold", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cardName: result.card_name,
+        setName: result.set_name,
+        cardNumber: result.card_number,
+        allowFreshLookup: !alreadyUsedToday,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "eBay sold lookup failed.");
     }
 
-    setEbayLoading(true);
-    setEbayError("");
+    setEbayResult(data);
 
-    try {
-      const response = await fetch("/api/ebay-sold", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          cardName: result.card_name,
-          setName: result.set_name,
-          cardNumber: result.card_number,
-        }),
-      });
+    if (data.source === "soldcomps") {
+      localStorage.setItem(todayKey, "true");
+    }
+  } catch (err) {
+    setEbayError(
+      err instanceof Error ? err.message : "Could not check eBay sold prices."
+    );
+  } finally {
+    setEbayLoading(false);
+  }
+}
 
       const data = await response.json();
 

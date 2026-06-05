@@ -45,6 +45,7 @@ export async function POST(request: Request) {
     const cardName = body.cardName?.toString() || "";
     const setName = body.setName?.toString() || "";
     const cardNumber = body.cardNumber?.toString() || "";
+    const allowFreshLookup = body.allowFreshLookup !== false;
 
     if (!cardName && !cardNumber) {
       return NextResponse.json(
@@ -77,7 +78,15 @@ export async function POST(request: Request) {
         items: cached.items || [],
       });
     }
-
+if (!allowFreshLookup) {
+  return NextResponse.json(
+    {
+      error:
+        "Free users get one fresh eBay sold-price lookup per day. No saved result was found for this card yet.",
+    },
+    { status: 429 }
+  );
+}
     if (!process.env.SOLDCOMPS_API_KEY) {
       return NextResponse.json(
         { error: "SoldComps API key is missing on the server." },
