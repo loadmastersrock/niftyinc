@@ -61,7 +61,89 @@ export default function Home() {
               and receive a professional condition report before spending money
               on PSA submissions.
             </p>
+<div className="mt-24">
+  <div className="mb-10 text-center">
+    <p className="mb-3 text-sm uppercase tracking-[0.3em] text-violet-400">
+      How Nifty Scan™ Works
+    </p>
 
+    <h2 className="text-4xl font-bold">
+      Multi-Stage AI Card Analysis
+    </h2>
+
+    <p className="mx-auto mt-4 max-w-3xl text-slate-400">
+      Nifty Scan™ uses multiple AI analysis stages to identify, assess and
+      value Pokémon cards from front and back images.
+    </p>
+  </div>
+
+  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {[
+      {
+        title: "Card Identification",
+        text: "Artwork, set symbols, card numbers and layout patterns are analysed to identify the card.",
+      },
+      {
+        title: "Photo Quality Analysis",
+        text: "Image sharpness, glare, lighting and corner visibility are checked before grading.",
+      },
+      {
+        title: "Condition Inspection",
+        text: "The AI evaluates whitening, corner wear, edge wear, scratches and surface defects.",
+      },
+      {
+        title: "Grading Engine",
+        text: "Centering, corners, edges and surface condition are combined into a PSA-style grade estimate.",
+      },
+      {
+        title: "Market Intelligence",
+        text: "Nifty Value™ combines market data and recent sold listings to estimate value and grading potential.",
+      },
+      {
+        title: "Continuous Improvement",
+        text: "User feedback helps improve identification accuracy and grading consistency over time.",
+      },
+    ].map((item) => (
+      <div
+        key={item.title}
+        className="rounded-3xl border border-slate-800 bg-slate-900/50 p-6 backdrop-blur-xl"
+      >
+        <h3 className="mb-3 text-xl font-bold text-white">
+          {item.title}
+        </h3>
+
+        <p className="text-slate-400">
+          {item.text}
+        </p>
+      </div>
+    ))}
+  </div>
+
+  <div className="mt-10 grid gap-4 md:grid-cols-3">
+    <div className="rounded-2xl border border-violet-500/20 bg-violet-500/10 p-5 text-center">
+      <p className="text-3xl font-black text-violet-300">40+</p>
+      <p className="mt-2 text-sm text-slate-300">
+        Analysis Checks
+      </p>
+    </div>
+
+    <div className="rounded-2xl border border-blue-500/20 bg-blue-500/10 p-5 text-center">
+      <p className="text-3xl font-black text-blue-300">2-Sided</p>
+      <p className="mt-2 text-sm text-slate-300">
+        Front & Back Review
+      </p>
+    </div>
+
+    <div className="rounded-2xl border border-green-500/20 bg-green-500/10 p-5 text-center">
+      <p className="text-3xl font-black text-green-300">
+        AI + Market Data
+      </p>
+      <p className="mt-2 text-sm text-slate-300">
+        Grade & Value Analysis
+      </p>
+    </div>
+  </div>
+</div>
             <div className="flex flex-col gap-4 sm:flex-row">
               <a
                 href="/grader"
