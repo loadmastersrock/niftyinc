@@ -211,7 +211,7 @@ export default function GraderPage() {
       .toISOString()
       .slice(0, 10)}`;
 
-    const alreadyUsedToday = null;
+    const alreadyUsedToday = localStorage.getItem(todayKey);
 
     if (alreadyUsedToday && !ebayResult) {
       setEbayError(
