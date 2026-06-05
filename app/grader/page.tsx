@@ -662,7 +662,7 @@ export default function GraderPage() {
 
 <p className="mb-4 rounded-xl border border-blue-400/20 bg-blue-500/10 p-3 text-sm text-blue-100">
   {ebayResult.source === "cache"
-    ? "Using recent saved eBay sold data — no new SoldComps credit was used."
+    ? "Using recent saved eBay sold data — no new credit was used."
     : "Live SoldComps lookup used — this result has now been saved for future users."}
 </p>
 
