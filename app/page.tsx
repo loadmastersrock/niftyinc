@@ -77,47 +77,6 @@ export default function Home() {
     </p>
   </div>
 
-  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-    {[
-      {
-        title: "Card Identification",
-        text: "Artwork, set symbols, card numbers and layout patterns are analysed to identify the card.",
-      },
-      {
-        title: "Photo Quality Analysis",
-        text: "Image sharpness, glare, lighting and corner visibility are checked before grading.",
-      },
-      {
-        title: "Condition Inspection",
-        text: "The AI evaluates whitening, corner wear, edge wear, scratches and surface defects.",
-      },
-      {
-        title: "Grading Engine",
-        text: "Centering, corners, edges and surface condition are combined into a PSA-style grade estimate.",
-      },
-      {
-        title: "Market Intelligence",
-        text: "Nifty Value™ combines market data and recent sold listings to estimate value and grading potential.",
-      },
-      {
-        title: "Continuous Improvement",
-        text: "User feedback helps improve identification accuracy and grading consistency over time.",
-      },
-    ].map((item) => (
-      <div
-        key={item.title}
-        className="rounded-3xl border border-slate-800 bg-slate-900/50 p-6 backdrop-blur-xl"
-      >
-        <h3 className="mb-3 text-xl font-bold text-white">
-          {item.title}
-        </h3>
-
-        <p className="text-slate-400">
-          {item.text}
-        </p>
-      </div>
-    ))}
-  </div>
 
   <div className="mt-10 grid gap-4 md:grid-cols-3">
     <div className="rounded-2xl border border-violet-500/20 bg-violet-500/10 p-5 text-center">
