@@ -3,6 +3,7 @@
 import Navbar from "@/components/Navbar";
 import { supabase } from "@/lib/supabase";
 import { useState } from "react";
+import AnalysisTerminal from "@/components/AnalysisTerminal";
 
 type EbaySoldResult = {
   source: "cache" | "soldcomps";
@@ -471,7 +472,7 @@ export default function GraderPage() {
             >
               {loading ? "Identifying & Analysing..." : "Analyse Card"}
             </button>
-
+{loading && <AnalysisTerminal />}
             <a
               href="/history"
               className="mt-4 block text-center text-sm text-slate-400 hover:text-white"
