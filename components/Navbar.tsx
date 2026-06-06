@@ -12,12 +12,23 @@ export default function Navbar() {
           <a href="/" className="text-slate-300 hover:text-white">
             Home
           </a>
+
           <a href="/grader" className="text-slate-300 hover:text-white">
-            Grader
+            AI Grader
           </a>
+
+          <a href="/card-values" className="text-slate-300 hover:text-white">
+            Card Values
+          </a>
+
           <a href="/history" className="text-slate-300 hover:text-white">
             History
           </a>
+
+          <a href="/admin" className="text-slate-300 hover:text-white">
+            Admin
+          </a>
+
           <a href="/#features" className="text-slate-300 hover:text-white">
             Features
           </a>
