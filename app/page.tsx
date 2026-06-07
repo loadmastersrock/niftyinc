@@ -2,200 +2,173 @@ import Navbar from "@/components/Navbar";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#03040a] text-white">
+    <main className="min-h-screen bg-[#080806] text-[#f5f0e8]">
       <Navbar />
 
-      <section className="relative mx-auto max-w-7xl px-6 pb-24 pt-40">
-        <div className="absolute left-0 top-24 h-[520px] w-[520px] rounded-full bg-amber-500/10 blur-3xl" />
-        <div className="absolute right-0 top-40 h-[520px] w-[520px] rounded-full bg-violet-700/10 blur-3xl" />
+      <section className="mx-auto max-w-7xl px-6 pb-28 pt-44">
+        <div className="max-w-5xl">
+          <p className="mb-6 text-sm uppercase tracking-[0.45em] text-[#c6a15b]">
+            Private Pokémon Card Acquisitions
+          </p>
 
-        <div className="relative z-10 grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
-          <div>
-            <p className="mb-5 text-sm uppercase tracking-[0.35em] text-amber-300">
-              Private Pokémon Card Buyer
-            </p>
+          <h1 className="max-w-5xl text-6xl font-semibold leading-[0.95] tracking-tight md:text-8xl">
+            We buy exceptional Pokémon cards.
+          </h1>
 
-            <h1 className="mb-6 text-5xl font-black leading-tight md:text-7xl">
-              Selling high-end Pokémon cards should feel premium.
-            </h1>
+          <p className="mt-8 max-w-2xl text-xl leading-relaxed text-[#b8b0a3]">
+            Nifty Inc privately evaluates and acquires high-value Pokémon cards,
+            graded slabs, vintage holographics, modern grails and premium
+            collections.
+          </p>
 
-            <p className="mb-8 max-w-2xl text-lg leading-relaxed text-slate-300">
-              Nifty Inc buys and evaluates rare, graded and high-value Pokémon
-              cards with a focus on discretion, market knowledge and serious
-              collector-grade service.
-            </p>
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <a
+              href="#valuation"
+              className="rounded-full bg-[#c6a15b] px-7 py-4 text-center text-sm font-bold uppercase tracking-[0.18em] text-black hover:bg-[#d8b66f]"
+            >
+              Request Valuation
+            </a>
 
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <a
-                href="#valuation"
-                className="rounded-xl bg-amber-400 px-6 py-4 text-center font-bold text-black hover:bg-amber-300"
-              >
-                Request Private Valuation
-              </a>
-
-              <a
-                href="/grader"
-                className="rounded-xl border border-slate-700 px-6 py-4 text-center font-bold text-white hover:border-amber-400/60"
-              >
-                Try AI Card Grader
-              </a>
-            </div>
-          </div>
-
-          <div className="relative rounded-[2rem] border border-amber-400/20 bg-gradient-to-br from-slate-950 to-black p-6 shadow-[0_0_60px_rgba(251,191,36,0.12)]">
-            <div className="rounded-[1.5rem] border border-slate-800 bg-black/60 p-6">
-              <p className="mb-4 text-sm uppercase tracking-[0.3em] text-amber-300">
-                We Buy
-              </p>
-
-              <div className="space-y-4">
-                {[
-                  "PSA 10 grails and chase cards",
-                  "Vintage holographics",
-                  "Japanese promos and trophy-style cards",
-                  "Sealed premium Pokémon products",
-                  "High-end collections and graded slabs",
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-2xl border border-slate-800 bg-slate-950/70 p-4"
-                  >
-                    <p className="text-slate-200">✓ {item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <a
+              href="/grader"
+              className="rounded-full border border-[#c6a15b]/40 px-7 py-4 text-center text-sm font-bold uppercase tracking-[0.18em] text-[#f5f0e8] hover:border-[#c6a15b]"
+            >
+              AI Pre-Check
+            </a>
           </div>
         </div>
 
-        <div className="relative z-10 mt-24 grid gap-5 md:grid-cols-3">
-          <div className="rounded-3xl border border-amber-400/20 bg-amber-400/10 p-6">
-            <p className="text-3xl font-black text-amber-300">Premium</p>
-            <p className="mt-2 text-slate-300">
-              Built for high-value Pokémon cards, not bulk low-end collections.
+        <div className="mt-24 grid gap-8 border-y border-[#2a261d] py-10 md:grid-cols-3">
+          <div>
+            <p className="text-sm uppercase tracking-[0.3em] text-[#c6a15b]">
+              Focus
+            </p>
+            <p className="mt-3 text-2xl font-semibold">
+              High-end cards only
             </p>
           </div>
 
-          <div className="rounded-3xl border border-violet-400/20 bg-violet-500/10 p-6">
-            <p className="text-3xl font-black text-violet-300">Discreet</p>
-            <p className="mt-2 text-slate-300">
-              Private valuations for collectors who want a simple, serious
-              process.
+          <div>
+            <p className="text-sm uppercase tracking-[0.3em] text-[#c6a15b]">
+              Method
+            </p>
+            <p className="mt-3 text-2xl font-semibold">
+              Data-led valuations
             </p>
           </div>
 
-          <div className="rounded-3xl border border-blue-400/20 bg-blue-500/10 p-6">
-            <p className="text-3xl font-black text-blue-300">Data-Led</p>
-            <p className="mt-2 text-slate-300">
-              AI grading tools, eBay sold data and market checks support
-              valuation decisions.
+          <div>
+            <p className="text-sm uppercase tracking-[0.3em] text-[#c6a15b]">
+              Service
+            </p>
+            <p className="mt-3 text-2xl font-semibold">
+              Private and discreet
             </p>
           </div>
         </div>
       </section>
 
-      <section className="border-y border-slate-800 bg-slate-950/60 px-6 py-20">
+      <section className="bg-[#f5f0e8] px-6 py-28 text-[#080806]">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-12 text-center">
-            <p className="mb-3 text-sm uppercase tracking-[0.3em] text-amber-300">
-              What We Look For
+          <div className="grid gap-16 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <p className="mb-5 text-sm uppercase tracking-[0.4em] text-[#8b6a2f]">
+                What We Buy
+              </p>
+
+              <h2 className="text-5xl font-semibold leading-tight">
+                Serious cards. Serious collectors.
+              </h2>
+            </div>
+
+            <div className="grid gap-8 md:grid-cols-2">
+              {[
+                "PSA 10 modern grails",
+                "Vintage holographics",
+                "Japanese promos",
+                "Gold stars and crystals",
+                "High-value raw cards",
+                "Premium sealed products",
+              ].map((item) => (
+                <div key={item} className="border-t border-[#c9bda7] pt-5">
+                  <p className="text-2xl font-semibold">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-28">
+        <div className="grid gap-16 lg:grid-cols-2">
+          <div>
+            <p className="mb-5 text-sm uppercase tracking-[0.4em] text-[#c6a15b]">
+              Valuation Process
             </p>
 
-            <h2 className="text-4xl font-black">
-              High-end cards deserve a high-end process.
+            <h2 className="text-5xl font-semibold leading-tight">
+              Every offer starts with condition, market demand and liquidity.
             </h2>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="space-y-10">
             {[
               {
-                title: "Condition",
-                text: "Centering, corners, surface, whitening and eye appeal are reviewed carefully.",
+                title: "Condition review",
+                text: "We review centering, surface, edges, corners, whitening and presentation quality.",
               },
               {
-                title: "Market Demand",
-                text: "We consider collector demand, liquidity and recent comparable sales.",
+                title: "Market comparison",
+                text: "Recent sold data, graded premiums and collector demand are considered before making an offer.",
               },
               {
-                title: "Grade Potential",
-                text: "Raw cards are assessed for their realistic grading upside.",
-              },
-              {
-                title: "Authenticity Signals",
-                text: "We look for consistency in card details, print quality and known set characteristics.",
+                title: "Private acquisition",
+                text: "If the card fits our buying criteria, we can discuss a direct private purchase.",
               },
             ].map((item) => (
-              <div
-                key={item.title}
-                className="rounded-3xl border border-slate-800 bg-black/40 p-6"
-              >
-                <h3 className="mb-3 text-xl font-bold text-amber-200">
+              <div key={item.title} className="border-t border-[#2a261d] pt-6">
+                <h3 className="text-2xl font-semibold text-[#f5f0e8]">
                   {item.title}
                 </h3>
-                <p className="text-slate-400">{item.text}</p>
+                <p className="mt-3 leading-relaxed text-[#b8b0a3]">
+                  {item.text}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="valuation" className="mx-auto max-w-7xl px-6 py-24">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <p className="mb-3 text-sm uppercase tracking-[0.3em] text-amber-300">
-              Private Valuation
-            </p>
+      <section id="valuation" className="bg-[#11100d] px-6 py-28">
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="mb-5 text-sm uppercase tracking-[0.4em] text-[#c6a15b]">
+            Sell To Nifty Inc
+          </p>
 
-            <h2 className="mb-5 text-4xl font-black">
-              Want to sell a serious Pokémon card?
-            </h2>
+          <h2 className="text-5xl font-semibold leading-tight">
+            Request a private card valuation.
+          </h2>
 
-            <p className="mb-6 text-lg text-slate-300">
-              Send clear front and back photos, the card name, set, number,
-              grade if already slabbed, and your asking price if you have one.
-            </p>
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#b8b0a3]">
+            Send clear front and back images, the card name, set, number,
+            grading company and grade if applicable. We focus on premium cards,
+            rare slabs and strong collector demand.
+          </p>
 
-            <p className="text-slate-400">
-              For now, use the AI grader link to pre-check condition, then
-              contact us with the cards you are considering selling.
-            </p>
-          </div>
+          <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+            <a
+              href="mailto:hello@niftyinc.io"
+              className="rounded-full bg-[#c6a15b] px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black hover:bg-[#d8b66f]"
+            >
+              Email Your Cards
+            </a>
 
-          <div className="rounded-3xl border border-amber-400/20 bg-amber-400/10 p-6">
-            <div className="rounded-2xl border border-slate-800 bg-black/50 p-6">
-              <h3 className="mb-5 text-2xl font-bold">
-                What to include
-              </h3>
-
-              <ul className="space-y-4 text-slate-300">
-                <li>• Front and back photos in good light</li>
-                <li>• Any PSA, CGC, BGS, TAG or ACE grade</li>
-                <li>• Card name, set and number</li>
-                <li>• Any visible damage or whitening</li>
-                <li>• Whether you want a cash offer or valuation only</li>
-              </ul>
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="/grader"
-                  className="rounded-xl bg-amber-400 px-5 py-3 text-center font-bold text-black hover:bg-amber-300"
-                >
-                  Pre-Check With AI Grader
-                </a>
-
-                <a
-                  href="mailto:hello@niftyinc.io"
-                  className="rounded-xl border border-slate-700 px-5 py-3 text-center font-bold text-white hover:border-amber-400/60"
-                >
-                  Email Cards
-                </a>
-              </div>
-
-              <p className="mt-4 text-xs text-slate-500">
-                Change hello@niftyinc.io to your preferred email address if
-                needed.
-              </p>
-            </div>
+            <a
+              href="/grader"
+              className="rounded-full border border-[#c6a15b]/40 px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-[#f5f0e8] hover:border-[#c6a15b]"
+            >
+              Use AI Pre-Check
+            </a>
           </div>
         </div>
       </section>
