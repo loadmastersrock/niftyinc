@@ -1,285 +1,204 @@
 import Navbar from "@/components/Navbar";
 
-const scanChecks = [
-  "Centering",
-  "Corner Wear",
-  "Edge Wear",
-  "Surface Scratches",
-  "Whitening",
-  "Print Lines",
-  "Dents & Creases",
-  "Eye Appeal",
-];
-
-const collectorBenefits = [
-  {
-    title: "Pre-screen raw cards",
-    text: "Check whether a card looks worth submitting before paying grading fees.",
-  },
-  {
-    title: "Compare multiple copies",
-    text: "Upload several cards and choose the strongest candidate for PSA, CGC, Beckett or TAG.",
-  },
-  {
-    title: "Buy smarter",
-    text: "Use AI condition reports to avoid overpaying for raw cards with hidden flaws.",
-  },
-];
-
-const comingSoon = [
-  "Collection Tracking",
-  "Market Price Alerts",
-  "PSA Submission Assistant",
-  "Population Data",
-  "Dealer Dashboard",
-  "Portfolio Analytics",
-];
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#050816] text-white">
+    <main className="min-h-screen overflow-hidden bg-[#03040a] text-white">
       <Navbar />
 
       <section className="relative mx-auto max-w-7xl px-6 pb-24 pt-40">
-        <div className="absolute left-20 top-40 h-96 w-96 rounded-full bg-violet-600/20 blur-3xl" />
-        <div className="absolute right-20 top-60 h-96 w-96 rounded-full bg-blue-600/20 blur-3xl" />
+        <div className="absolute left-0 top-24 h-[520px] w-[520px] rounded-full bg-amber-500/10 blur-3xl" />
+        <div className="absolute right-0 top-40 h-[520px] w-[520px] rounded-full bg-violet-700/10 blur-3xl" />
 
-        <div className="relative z-10 grid items-center gap-16 lg:grid-cols-2">
+        <div className="relative z-10 grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
-            <p className="mb-4 text-sm uppercase tracking-[0.3em] text-violet-400">
-              Nifty Scan™
+            <p className="mb-5 text-sm uppercase tracking-[0.35em] text-amber-300">
+              Private Pokémon Card Buyer
             </p>
 
-            <h1 className="mb-6 text-5xl font-bold leading-tight md:text-7xl">
-              Know Before
-              <br />
-              You Grade
+            <h1 className="mb-6 text-5xl font-black leading-tight md:text-7xl">
+              Selling high-end Pokémon cards should feel premium.
             </h1>
 
-            <p className="mb-10 max-w-2xl text-xl text-slate-300">
-              AI-powered pre-grading for collectors. Upload your Pokémon cards
-              and receive a professional condition report before spending money
-              on PSA submissions.
+            <p className="mb-8 max-w-2xl text-lg leading-relaxed text-slate-300">
+              Nifty Inc buys and evaluates rare, graded and high-value Pokémon
+              cards with a focus on discretion, market knowledge and serious
+              collector-grade service.
             </p>
-<div className="mt-24">
-  <div className="mb-10 text-center">
-    <p className="mb-3 text-sm uppercase tracking-[0.3em] text-violet-400">
-      How Nifty Scan™ Works
-    </p>
 
-    <h2 className="text-4xl font-bold">
-      Multi-Stage AI Card Analysis
-    </h2>
-
-    <p className="mx-auto mt-4 max-w-3xl text-slate-400">
-      Nifty Scan™ uses multiple AI analysis stages to identify, assess and
-      value Pokémon cards from front and back images.
-    </p>
-  </div>
-
-
-  <div className="mt-10 grid gap-4 md:grid-cols-3">
-    <div className="rounded-2xl border border-violet-500/20 bg-violet-500/10 p-5 text-center">
-      <p className="text-3xl font-black text-violet-300">40+</p>
-      <p className="mt-2 text-sm text-slate-300">
-        Analysis Checks
-      </p>
-    </div>
-
-    <div className="rounded-2xl border border-blue-500/20 bg-blue-500/10 p-5 text-center">
-      <p className="text-3xl font-black text-blue-300">2-Sided</p>
-      <p className="mt-2 text-sm text-slate-300">
-        Front & Back Review
-      </p>
-    </div>
-
-    <div className="rounded-2xl border border-green-500/20 bg-green-500/10 p-5 text-center">
-      <p className="text-3xl font-black text-green-300">
-        AI + Market Data
-      </p>
-      
-    </div>
-  </div>
-</div>
-            <div className="mt-12 flex gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <a
-                href="/grader"
-                className="rounded-xl bg-violet-600 px-6 py-4 text-center font-semibold text-white hover:bg-violet-500"
+                href="#valuation"
+                className="rounded-xl bg-amber-400 px-6 py-4 text-center font-bold text-black hover:bg-amber-300"
               >
-                Start Free Scan
+                Request Private Valuation
               </a>
 
               <a
-                href="#demo"
-                className="rounded-xl border border-slate-700 px-6 py-4 text-center font-semibold text-white hover:border-slate-500"
+                href="/grader"
+                className="rounded-xl border border-slate-700 px-6 py-4 text-center font-bold text-white hover:border-amber-400/60"
               >
-                View Demo Report
+                Try AI Card Grader
               </a>
             </div>
           </div>
 
-          <div
-            id="demo"
-            className="rounded-3xl border border-slate-800 bg-slate-900/50 p-6 shadow-2xl backdrop-blur-xl"
-          >
-            <p className="mb-4 text-sm text-slate-400">Example AI Report</p>
+          <div className="relative rounded-[2rem] border border-amber-400/20 bg-gradient-to-br from-slate-950 to-black p-6 shadow-[0_0_60px_rgba(251,191,36,0.12)]">
+            <div className="rounded-[1.5rem] border border-slate-800 bg-black/60 p-6">
+              <p className="mb-4 text-sm uppercase tracking-[0.3em] text-amber-300">
+                We Buy
+              </p>
 
-            <h3 className="mb-1 text-2xl font-bold">Charizard ex</h3>
-            <p className="mb-6 text-sm text-slate-400">
-              Obsidian Flames · 223/197
+              <div className="space-y-4">
+                {[
+                  "PSA 10 grails and chase cards",
+                  "Vintage holographics",
+                  "Japanese promos and trophy-style cards",
+                  "Sealed premium Pokémon products",
+                  "High-end collections and graded slabs",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-2xl border border-slate-800 bg-slate-950/70 p-4"
+                  >
+                    <p className="text-slate-200">✓ {item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative z-10 mt-24 grid gap-5 md:grid-cols-3">
+          <div className="rounded-3xl border border-amber-400/20 bg-amber-400/10 p-6">
+            <p className="text-3xl font-black text-amber-300">Premium</p>
+            <p className="mt-2 text-slate-300">
+              Built for high-value Pokémon cards, not bulk low-end collections.
+            </p>
+          </div>
+
+          <div className="rounded-3xl border border-violet-400/20 bg-violet-500/10 p-6">
+            <p className="text-3xl font-black text-violet-300">Discreet</p>
+            <p className="mt-2 text-slate-300">
+              Private valuations for collectors who want a simple, serious
+              process.
+            </p>
+          </div>
+
+          <div className="rounded-3xl border border-blue-400/20 bg-blue-500/10 p-6">
+            <p className="text-3xl font-black text-blue-300">Data-Led</p>
+            <p className="mt-2 text-slate-300">
+              AI grading tools, eBay sold data and market checks support
+              valuation decisions.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-slate-800 bg-slate-950/60 px-6 py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12 text-center">
+            <p className="mb-3 text-sm uppercase tracking-[0.3em] text-amber-300">
+              What We Look For
             </p>
 
-            <div className="mb-6 rounded-2xl bg-slate-950/70 p-5">
-              <div className="flex justify-between">
-                <span className="text-slate-400">Predicted Grade</span>
-                <span className="font-bold text-green-400">PSA 9</span>
-              </div>
+            <h2 className="text-4xl font-black">
+              High-end cards deserve a high-end process.
+            </h2>
+          </div>
 
-              <div className="mt-3 flex justify-between">
-                <span className="text-slate-400">PSA 10 Chance</span>
-                <span className="font-bold text-violet-400">38%</span>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                title: "Condition",
+                text: "Centering, corners, surface, whitening and eye appeal are reviewed carefully.",
+              },
+              {
+                title: "Market Demand",
+                text: "We consider collector demand, liquidity and recent comparable sales.",
+              },
+              {
+                title: "Grade Potential",
+                text: "Raw cards are assessed for their realistic grading upside.",
+              },
+              {
+                title: "Authenticity Signals",
+                text: "We look for consistency in card details, print quality and known set characteristics.",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="rounded-3xl border border-slate-800 bg-black/40 p-6"
+              >
+                <h3 className="mb-3 text-xl font-bold text-amber-200">
+                  {item.title}
+                </h3>
+                <p className="text-slate-400">{item.text}</p>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <div className="space-y-3">
-              {[
-                ["Centering", "9.4"],
-                ["Corners", "8.8"],
-                ["Edges", "9.1"],
-                ["Surface", "8.6"],
-              ].map(([label, value]) => (
-                <div
-                  key={label}
-                  className="flex justify-between rounded-xl border border-slate-800 bg-slate-950/40 px-4 py-3"
+      <section id="valuation" className="mx-auto max-w-7xl px-6 py-24">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <p className="mb-3 text-sm uppercase tracking-[0.3em] text-amber-300">
+              Private Valuation
+            </p>
+
+            <h2 className="mb-5 text-4xl font-black">
+              Want to sell a serious Pokémon card?
+            </h2>
+
+            <p className="mb-6 text-lg text-slate-300">
+              Send clear front and back photos, the card name, set, number,
+              grade if already slabbed, and your asking price if you have one.
+            </p>
+
+            <p className="text-slate-400">
+              For now, use the AI grader link to pre-check condition, then
+              contact us with the cards you are considering selling.
+            </p>
+          </div>
+
+          <div className="rounded-3xl border border-amber-400/20 bg-amber-400/10 p-6">
+            <div className="rounded-2xl border border-slate-800 bg-black/50 p-6">
+              <h3 className="mb-5 text-2xl font-bold">
+                What to include
+              </h3>
+
+              <ul className="space-y-4 text-slate-300">
+                <li>• Front and back photos in good light</li>
+                <li>• Any PSA, CGC, BGS, TAG or ACE grade</li>
+                <li>• Card name, set and number</li>
+                <li>• Any visible damage or whitening</li>
+                <li>• Whether you want a cash offer or valuation only</li>
+              </ul>
+
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href="/grader"
+                  className="rounded-xl bg-amber-400 px-5 py-3 text-center font-bold text-black hover:bg-amber-300"
                 >
-                  <span className="text-slate-300">{label}</span>
-                  <span className="font-semibold">{value}</span>
-                </div>
-              ))}
-            </div>
+                  Pre-Check With AI Grader
+                </a>
 
-            <div className="mt-6 rounded-2xl border border-violet-500/30 bg-violet-500/10 p-4">
-              <p className="text-sm text-slate-300">
-                Main issue: minor whitening on rear bottom-left corner.
+                <a
+                  href="mailto:hello@niftyinc.io"
+                  className="rounded-xl border border-slate-700 px-5 py-3 text-center font-bold text-white hover:border-amber-400/60"
+                >
+                  Email Cards
+                </a>
+              </div>
+
+              <p className="mt-4 text-xs text-slate-500">
+                Change hello@niftyinc.io to your preferred email address if
+                needed.
               </p>
             </div>
           </div>
         </div>
       </section>
-
-      <section id="features" className="relative z-10 mx-auto max-w-7xl px-6 py-20">
-        <div className="mb-12 max-w-3xl">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-violet-400">
-            What We Check
-          </p>
-          <h2 className="text-4xl font-bold md:text-5xl">
-            Stop Wasting Grading Fees
-          </h2>
-          <p className="mt-5 text-lg text-slate-300">
-            Nifty Scan™ helps collectors spot visible issues before submitting
-            cards for grading.
-          </p>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {scanChecks.map((item) => (
-            <div
-              key={item}
-              className="rounded-2xl border border-slate-800 bg-slate-900/50 p-5 backdrop-blur-xl"
-            >
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/10 text-violet-300">
-                ✓
-              </div>
-              <h3 className="font-semibold text-white">{item}</h3>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="relative z-10 mx-auto max-w-7xl px-6 py-20">
-        <div className="grid gap-8 lg:grid-cols-3">
-          {collectorBenefits.map((feature) => (
-            <div
-              key={feature.title}
-              className="rounded-3xl border border-slate-800 bg-slate-900/40 p-8"
-            >
-              <h3 className="mb-4 text-2xl font-bold">{feature.title}</h3>
-              <p className="text-slate-400">{feature.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="platform" className="relative z-10 mx-auto max-w-7xl px-6 py-20">
-        <div className="rounded-3xl border border-violet-500/20 bg-violet-500/10 p-8 md:p-10">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-violet-300">
-            Coming Soon
-          </p>
-          <h2 className="mb-8 text-3xl font-bold md:text-4xl">
-            More than a grading estimate.
-          </h2>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {comingSoon.map((item) => (
-              <div
-                key={item}
-                className="rounded-2xl border border-violet-400/20 bg-slate-950/40 px-5 py-4 text-slate-200"
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="pricing" className="relative z-10 mx-auto max-w-7xl px-6 py-20">
-        <div className="rounded-3xl border border-slate-800 bg-slate-900/40 p-8 backdrop-blur-xl">
-          <p className="mb-6 text-center text-sm uppercase tracking-[0.25em] text-slate-500">
-            Built for collectors submitting to
-          </p>
-
-          <div className="grid gap-4 text-center sm:grid-cols-2 lg:grid-cols-4">
-            {["PSA", "CGC", "Beckett", "TAG"].map((company) => (
-              <div
-                key={company}
-                className="rounded-2xl border border-slate-800 bg-slate-950/60 px-6 py-5 text-2xl font-black tracking-widest text-slate-200"
-              >
-                {company}
-              </div>
-            ))}
-          </div>
-
-          <p className="mx-auto mt-6 max-w-2xl text-center text-sm text-slate-500">
-            Nifty Inc provides AI-powered pre-grading estimates only. We are not
-            affiliated with PSA, CGC, Beckett or TAG.
-          </p>
-        </div>
-      </section>
-
-      <footer className="border-t border-slate-800 bg-slate-950/80 px-6 py-10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div>
-            <p className="font-bold tracking-wider">
-              NIFTY<span className="text-violet-400">INC</span>
-            </p>
-            <p className="mt-2 text-sm text-slate-500">
-              AI pre-grading tools for serious collectors.
-            </p>
-          </div>
-
-          <div className="flex gap-6 text-sm text-slate-400">
-            <a href="#" className="hover:text-white">
-              Privacy
-            </a>
-            <a href="#" className="hover:text-white">
-              Terms
-            </a>
-            <a href="#" className="hover:text-white">
-              Contact
-            </a>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }

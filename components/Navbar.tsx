@@ -2,7 +2,7 @@ import Logo from "@/components/Logo";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-slate-800/50 bg-[#050816]/80 backdrop-blur-xl">
+    <nav className="fixed top-0 z-50 w-full border-b border-amber-500/10 bg-[#03040a]/85 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <a href="/">
           <Logo />
@@ -13,12 +13,12 @@ export default function Navbar() {
             Home
           </a>
 
-          <a href="/grader" className="text-slate-300 hover:text-white">
-            AI Grader
-          </a>
-
           <a href="/card-values" className="text-slate-300 hover:text-white">
             Card Values
+          </a>
+
+          <a href="/grader" className="text-slate-300 hover:text-white">
+            AI Grader
           </a>
 
           <a href="/history" className="text-slate-300 hover:text-white">
@@ -28,17 +28,13 @@ export default function Navbar() {
           <a href="/admin" className="text-slate-300 hover:text-white">
             Admin
           </a>
-
-          <a href="/#features" className="text-slate-300 hover:text-white">
-            Features
-          </a>
         </div>
 
         <a
-          href="/grader"
-          className="rounded-lg bg-violet-600 px-4 py-2 font-medium text-white hover:bg-violet-500"
+          href="#valuation"
+          className="rounded-lg border border-amber-400/40 bg-amber-400/10 px-4 py-2 font-medium text-amber-200 hover:bg-amber-400/20"
         >
-          Start Free
+          Sell Your Card
         </a>
       </div>
     </nav>
