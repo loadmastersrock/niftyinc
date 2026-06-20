@@ -1,6 +1,22 @@
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#07070a] text-white">
+      <header className="site-header">
+        <a href="/" className="logo">
+          <span className="logo-mark">N</span>
+          <span className="logo-text">NiftyInc</span>
+        </a>
+
+        <a
+          href="https://t.me/niftyinc"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="header-link"
+        >
+          Telegram
+        </a>
+      </header>
+
       <section className="hero">
         <div className="badge">
           NFT Gaming • Web3 Marketing • Community Growth
