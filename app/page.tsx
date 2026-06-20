@@ -1,6 +1,9 @@
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#07070a] text-white">
+    <main className="site-shell">
+      <div className="background-glow" />
+      <div className="grid-overlay" />
+
       <header className="site-header">
         <a href="/" className="logo">
           <span className="logo-mark">N</span>
@@ -18,14 +21,12 @@ export default function Home() {
       </header>
 
       <section className="hero">
-        <div className="badge">
-          NFT Gaming • Web3 Marketing • Community Growth
-        </div>
+        <div className="badge">NFT Gaming • Web3 Marketing • Community Growth</div>
 
         <h1>
           Crypto Gaming Strategy
           <br />
-          From an OG Who Has Been There
+          <span>From an OG Who Has Been There</span>
         </h1>
 
         <p>
@@ -54,7 +55,7 @@ export default function Home() {
         <h2>Built From Real Web3 Gaming Experience</h2>
 
         <p>
-          I've been involved in NFT and crypto gaming since the early days,
+          I have been involved in NFT and crypto gaming since the early days,
           helping projects grow communities, launch successfully and build
           stronger player engagement.
         </p>
@@ -70,8 +71,8 @@ export default function Home() {
         <div className="card">
           <h3>Community Building</h3>
           <p>
-            Discord setup, moderation systems, onboarding flows, clan
-            structures and player retention.
+            Discord setup, moderation systems, onboarding flows, clan structures
+            and player retention.
           </p>
         </div>
 
@@ -104,19 +105,19 @@ export default function Home() {
         <h2>Not Another Hype Website</h2>
 
         <p>
-          The crypto gaming industry doesn't need more recycled news and empty
+          The crypto gaming industry does not need more recycled news and empty
           promises. It needs projects that understand players, communities and
           sustainable growth.
         </p>
       </section>
 
       <section className="contact" id="contact">
-        <h2>Let's Build Something Great</h2>
+        <h2>Let&apos;s Build Something Great</h2>
 
         <p>
-          Whether you're launching a new NFT game, growing a community,
-          building a Discord or looking for strategic advice, I'd love to hear
-          about your project.
+          Whether you are launching a new NFT game, growing a community,
+          building a Discord or looking for strategic advice, I would love to
+          hear about your project.
         </p>
 
         <a

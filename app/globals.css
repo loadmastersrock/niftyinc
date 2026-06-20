@@ -17,6 +17,48 @@ a {
   text-decoration: none;
 }
 
+.site-shell {
+  min-height: 100vh;
+  background: #07070a;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.background-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(155, 124, 255, 0.24), transparent 34%),
+    radial-gradient(circle at 85% 18%, rgba(0, 245, 212, 0.16), transparent 32%),
+    radial-gradient(circle at 50% 85%, rgba(90, 70, 255, 0.18), transparent 38%);
+  animation: glowMove 12s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black, transparent 80%);
+  animation: gridMove 18s linear infinite;
+  z-index: 1;
+}
+
+.site-header,
+.hero,
+.section,
+.cards,
+.contact {
+  position: relative;
+  z-index: 2;
+}
+
 .site-header {
   position: fixed;
   top: 0;
@@ -27,8 +69,8 @@ a {
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  background: rgba(7, 7, 10, 0.8);
-  backdrop-filter: blur(12px);
+  background: rgba(7, 7, 10, 0.72);
+  backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -40,9 +82,9 @@ a {
 }
 
 .logo-mark {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
   background: linear-gradient(135deg, #9b7cff, #00f5d4);
   display: flex;
   align-items: center;
@@ -50,7 +92,8 @@ a {
   color: #07070a;
   font-weight: 900;
   font-size: 20px;
-  box-shadow: 0 0 24px rgba(155, 124, 255, 0.4);
+  box-shadow: 0 0 32px rgba(155, 124, 255, 0.48);
+  animation: logoPulse 3s ease-in-out infinite;
 }
 
 .logo-text {
@@ -69,8 +112,8 @@ a {
 }
 
 .hero {
-  min-height: 90vh;
-  padding: 140px 24px 90px;
+  min-height: 92vh;
+  padding: 150px 24px 90px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,19 +122,34 @@ a {
 }
 
 .badge {
-  color: #9b7cff;
-  font-weight: 700;
+  width: fit-content;
+  color: #d8d0ff;
+  font-weight: 800;
   margin-bottom: 24px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 13px;
+  padding: 10px 14px;
+  border: 1px solid rgba(155, 124, 255, 0.32);
+  border-radius: 999px;
+  background: rgba(155, 124, 255, 0.08);
+  box-shadow: 0 0 28px rgba(155, 124, 255, 0.14);
 }
 
 h1 {
-  font-size: clamp(48px, 8vw, 88px);
+  font-size: clamp(48px, 8vw, 90px);
   line-height: 0.95;
   margin: 0 0 28px;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.065em;
+}
+
+h1 span {
+  background: linear-gradient(90deg, #ffffff, #9b7cff, #00f5d4);
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: gradientShift 5s linear infinite;
 }
 
 h2 {
@@ -123,23 +181,50 @@ p {
 .secondary {
   padding: 15px 24px;
   border-radius: 999px;
-  font-weight: 700;
+  font-weight: 800;
   display: inline-block;
-  transition: 0.25s;
+  transition: 0.25s ease;
 }
 
 .primary {
   background: white;
   color: #07070a;
+  position: relative;
+  overflow: hidden;
+}
+
+.primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-120%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(155, 124, 255, 0.35),
+    transparent
+  );
+  transition: 0.6s;
 }
 
 .primary:hover {
   transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(155, 124, 255, 0.25);
+}
+
+.primary:hover::after {
+  transform: translateX(120%);
 }
 
 .secondary {
   border: 1px solid #333344;
   color: white;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.secondary:hover {
+  border-color: rgba(155, 124, 255, 0.65);
+  box-shadow: 0 0 30px rgba(155, 124, 255, 0.16);
 }
 
 .section,
@@ -159,10 +244,18 @@ p {
 }
 
 .card {
-  background: #11111a;
-  border: 1px solid #222233;
+  background: rgba(17, 17, 26, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 24px;
   padding: 28px;
+  backdrop-filter: blur(10px);
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(155, 124, 255, 0.55);
+  box-shadow: 0 20px 60px rgba(155, 124, 255, 0.16);
 }
 
 .card p {
@@ -170,14 +263,57 @@ p {
 }
 
 .dark {
-  background: #101018;
+  background: rgba(16, 16, 24, 0.82);
   max-width: none;
   padding-left: calc((100% - 1100px) / 2 + 24px);
   padding-right: calc((100% - 1100px) / 2 + 24px);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .contact {
   padding-bottom: 120px;
+}
+
+@keyframes glowMove {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(0, -24px, 0) scale(1.08);
+  }
+}
+
+@keyframes gridMove {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 48px 48px;
+  }
+}
+
+@keyframes gradientShift {
+  from {
+    background-position: 0% center;
+  }
+
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes logoPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 28px rgba(155, 124, 255, 0.42);
+  }
+
+  50% {
+    box-shadow: 0 0 44px rgba(0, 245, 212, 0.42);
+  }
 }
 
 @media (max-width: 900px) {
@@ -186,7 +322,7 @@ p {
   }
 
   .hero {
-    padding-top: 120px;
+    padding-top: 130px;
   }
 
   p {
@@ -199,5 +335,9 @@ p {
 
   .logo-text {
     font-size: 18px;
+  }
+
+  h1 {
+    font-size: clamp(44px, 13vw, 64px);
   }
 }
