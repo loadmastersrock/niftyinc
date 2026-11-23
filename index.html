@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
-:root{--ivory:#F2EEE6;--ink:#15130F;--soft:#7C766B;--line:#D3CCBE;--live:#3E7A4E}
+:root{--ivory:#F2EEE6;--ink:#15130F;--soft:#7C766B;--line:#D3CCBE;--live:#3E7A4E;--bad:#9A5B4A}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--ivory);color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;position:relative;min-height:100vh}
 .frame{position:absolute;inset:18px;border:1px solid var(--line);pointer-events:none}
@@ -25,20 +25,39 @@ a{color:inherit;text-decoration:none}
 .lnk{transition:.25s;cursor:pointer}.lnk:hover{color:var(--ink)}
 .sheet{max-width:600px;margin:0 auto;position:relative;padding:56px 46px 48px;min-height:100vh;display:flex;flex-direction:column}
 .top{display:flex;justify-content:space-between;align-items:center}
-.core{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 0}
+.core{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:36px 0}
 .word{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:clamp(46px,13vw,86px);letter-spacing:.2em;text-transform:uppercase;line-height:1;white-space:nowrap;text-indent:.2em}
 .sub{margin-top:16px;font-size:8px;letter-spacing:.42em;text-transform:uppercase;color:var(--soft)}
 .rule{width:34px;height:1px;background:var(--ink);margin:26px 0 20px;opacity:.55}
 .line{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:15.5px;color:#3A362E;line-height:1.65;max-width:24ch}
 .hex{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.2em;color:#A9A294;user-select:all}
-.door{margin-top:34px;display:flex;align-items:center;border-bottom:1px solid var(--line);width:100%;max-width:250px;transition:border-color .35s}
+.test{margin-top:28px;width:100%;max-width:290px;transition:opacity .4s,transform .4s}
+.test.gone{opacity:0;transform:translateY(-6px);pointer-events:none}
+.step{display:none}
+.step.on{display:block;animation:fade .4s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.qrow{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.q{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:14px;color:#3A362E;text-align:left}
+.count{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;color:#B0A99B;white-space:nowrap}
+.opts{margin-top:11px;display:grid;border-top:1px solid var(--line)}
+.opt{display:flex;align-items:center;gap:10px;background:none;border:0;border-bottom:1px solid var(--line);padding:8px 4px;cursor:pointer;font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#4C473E;transition:.2s;text-align:left;width:100%}
+.opt b{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:8px;color:#B0A99B;transition:.2s}
+.opt:hover{color:var(--ink);padding-left:9px}
+.opt:hover b{color:var(--ink)}
+.opt.bad{color:var(--bad)}
+.fb{margin-top:9px;font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft);min-height:11px;text-align:left}
+.fb.good{color:var(--live)}
+.skip{display:inline-block;margin-top:7px;font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:#B0A99B;cursor:pointer;border-bottom:1px solid var(--line);padding-bottom:2px}
+.skip:hover{color:var(--ink);border-color:var(--ink)}
+.door{margin-top:28px;display:flex;align-items:center;border-bottom:1px solid var(--line);width:100%;max-width:250px;transition:border-color .35s,opacity .4s,transform .4s;opacity:0;transform:translateY(6px);pointer-events:none}
+.door.show{opacity:1;transform:none;pointer-events:auto}
 .door:focus-within{border-bottom-color:var(--ink)}
 .door input{flex:1;background:none;border:0;outline:none;color:var(--ink);font-family:'Inter',sans-serif;font-size:11.5px;letter-spacing:.06em;padding:0 0 9px;text-align:center}
 .door input::placeholder{color:#A29B8E;letter-spacing:.16em;text-transform:uppercase;font-size:8.5px}
 .door button{background:none;border:0;color:var(--soft);cursor:pointer;font-size:12px;padding:0 0 9px 10px;transition:.25s}
 .door button:hover{color:var(--ink);transform:translateX(2px)}
-.done{display:none;margin-top:34px;padding-bottom:9px;border-bottom:1px solid var(--ink);font-size:10px;letter-spacing:.22em;text-transform:uppercase;text-align:center}
-.done.on{display:block}.door.off{display:none}
+.done{display:none;margin-top:28px;padding-bottom:9px;border-bottom:1px solid var(--ink);font-size:10px;letter-spacing:.22em;text-transform:uppercase;text-align:center}
+.done.on{display:block}
 .base{display:grid;grid-template-columns:1fr auto auto;gap:24px;align-items:flex-end;border-top:1px solid var(--line);padding-top:14px}
 .base .v{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#4C473E;transition:.25s;display:block;margin-top:4px}
 .base a.v:hover{color:var(--ink)}.base .r{text-align:right}
@@ -49,7 +68,7 @@ a{color:inherit;text-decoration:none}
 .d1{animation-delay:.1s}.d2{animation-delay:.35s}.d3{animation-delay:.55s}.d4{animation-delay:.75s}.d5{animation-delay:.95s}
 @keyframes rise{to{opacity:1;transform:none}}
 @media (max-width:480px){.sheet{padding:44px 26px 38px}.frame{inset:12px}.base{gap:14px}}
-@media (prefers-reduced-motion:reduce){.an{opacity:1;transform:none;animation:none}.dot{animation:none}}
+@media (prefers-reduced-motion:reduce){.an{opacity:1;transform:none;animation:none}.dot{animation:none}.step.on{animation:none}}
 </style>
 </head>
 <body>
@@ -62,7 +81,29 @@ a{color:inherit;text-decoration:none}
     <div class="rule an d3"></div>
     <p class="line an d3">Pieces, placed privately.<br>Provenance first.</p>
     <span class="hex an d4">0x4e69667479</span>
-    <div class="door an d4" id="door"><input id="mail" placeholder="address" aria-label="Email or Telegram"><button id="go" aria-label="Send">→</button></div>
+    <div class="test an d4" id="test">
+      <div class="step on" id="s1">
+        <div class="qrow"><p class="q">First thing you check?</p><span class="count">01 / 02</span></div>
+        <div class="opts">
+          <button class="opt" data-ok="0"><b>A</b><span>The floor</span></button>
+          <button class="opt" data-ok="1"><b>B</b><span>Provenance</span></button>
+          <button class="opt" data-ok="0"><b>C</b><span>The timeline</span></button>
+        </div>
+        <p class="fb" id="fb1"></p>
+        <span class="skip" data-to="s2">Skip →</span>
+      </div>
+      <div class="step" id="s2">
+        <div class="qrow"><p class="q">A piece with no provenance is worth…</p><span class="count">02 / 02</span></div>
+        <div class="opts">
+          <button class="opt" data-ok="0"><b>A</b><span>The floor</span></button>
+          <button class="opt" data-ok="1"><b>B</b><span>A guess</span></button>
+          <button class="opt" data-ok="0"><b>C</b><span>More, if it's rare</span></button>
+        </div>
+        <p class="fb" id="fb2"></p>
+        <span class="skip" data-to="door">Skip →</span>
+      </div>
+    </div>
+    <div class="door" id="door"><input id="mail" placeholder="address" aria-label="Email or Telegram"><button id="go" aria-label="Send">→</button></div>
     <div class="done" id="done">Received</div>
     <noscript><p class="cap" style="margin-top:20px"><a href="mailto:office@niftyinc.io">office@niftyinc.io</a></p></noscript>
   </div>
@@ -76,13 +117,12 @@ a{color:inherit;text-decoration:none}
 function tick(){document.getElementById('t').textContent=new Date().toLocaleTimeString('en-GB',{timeZone:'Europe/London',hour:'2-digit',minute:'2-digit',hour12:false})}
 tick();setInterval(tick,15000);
 var b=24318407;setInterval(function(){b++;document.getElementById('blk').textContent=b.toLocaleString('en-GB')},12000);
-document.getElementById('go').onclick=function(){
-  var v=document.getElementById('mail').value.trim();
-  if(!v)return document.getElementById('mail').focus();
-  if(v.charAt(0)==='@'){window.open('https://t.me/'+v.slice(1),'_blank')}
-  else{location.href='mailto:office@niftyinc.io?subject=Enquiry&body='+encodeURIComponent('Address: '+v+'\n\n')}
-  document.getElementById('door').classList.add('off');document.getElementById('done').classList.add('on');
-};
+function openDoor(){document.getElementById('test').classList.add('gone');setTimeout(function(){document.getElementById('door').classList.add('show');document.getElementById('mail').focus()},260)}
+function next(id){document.querySelectorAll('.step').forEach(function(s){s.classList.remove('on')});document.getElementById(id).classList.add('on')}
+document.querySelectorAll('#s1 .opt').forEach(function(o){o.onclick=function(){if(o.dataset.ok==='1'){document.getElementById('fb1').textContent='In.';document.getElementById('fb1').classList.add('good');setTimeout(function(){next('s2')},300)}else{o.classList.add('bad');document.getElementById('fb1').textContent='Not quite — again.'}}});
+document.querySelectorAll('#s2 .opt').forEach(function(o){o.onclick=function(){if(o.dataset.ok==='1'){document.getElementById('fb2').textContent='In.';document.getElementById('fb2').classList.add('good');setTimeout(openDoor,320)}else{o.classList.add('bad');document.getElementById('fb2').textContent='Not quite — again.'}}});
+document.querySelectorAll('.skip').forEach(function(s){s.onclick=function(){s.dataset.to==='door'?openDoor():next(s.dataset.to)}});
+document.getElementById('go').onclick=function(){var v=document.getElementById('mail').value.trim();if(!v)return document.getElementById('mail').focus();if(v.charAt(0)==='@'){window.open('https://t.me/'+v.slice(1),'_blank')}else{location.href='mailto:office@niftyinc.io?subject=Enquiry&body='+encodeURIComponent('Address: '+v+'\n\n')}document.getElementById('door').classList.remove('show');document.getElementById('done').classList.add('on')};
 document.getElementById('mail').onkeydown=function(e){if(e.key==='Enter')document.getElementById('go').click()};
 </script>
 </body>
