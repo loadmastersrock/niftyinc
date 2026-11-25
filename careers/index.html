@@ -5,135 +5,126 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Careers — Nifty</title>
 <meta name="description" content="We hire rarely. Only at the top of the market.">
-<meta name="theme-color" content="#F2EEE6">
+<meta name="theme-color" content="#08080A">
 <meta property="og:title" content="Careers — Nifty">
 <meta property="og:description" content="We hire rarely. Only at the top of the market.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://niftyinc.io/careers">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F2EEE6'/%3E%3Ctext x='32' y='46' font-family='Georgia,serif' font-size='40' text-anchor='middle' fill='%2315130F'%3EN%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2308080A'/%3E%3Ctext x='32' y='46' font-family='Helvetica,Arial,sans-serif' font-size='34' font-weight='bold' text-anchor='middle' fill='%23C9FF2E'%3EN%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--ivory:#F2EEE6;--ink:#15130F;--soft:#7C766B;--line:#D3CCBE;--live:#3E7A4E;--bad:#9A5B4A}
+:root{--void:#08080A;--bone:#EDE9E0;--dim:#78736A;--faint:#232326;--acid:#C9FF2E}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--ivory);color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;position:relative;min-height:100vh}
-.frame{position:absolute;inset:18px;border:1px solid var(--line);pointer-events:none}
+body{background:var(--void);color:var(--bone);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+body::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23n)'/%3E%3C/svg%3E")}
 a{color:inherit;text-decoration:none}
-.cap{font-family:'Inter',sans-serif;font-size:8.5px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--soft)}
+.cap{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
-.lnk{transition:.25s;cursor:pointer}.lnk:hover{color:var(--ink)}
-.sheet{max-width:600px;margin:0 auto;position:relative;padding:56px 46px 48px;min-height:100vh;display:flex;flex-direction:column}
-.top{display:flex;justify-content:space-between;align-items:center}
-.core{flex:1;display:flex;flex-direction:column;align-items:flex-start;padding:34px 0 0}
-.ctitle{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:clamp(30px,6.4vw,42px);line-height:1.05}
-.clead{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:15.5px;color:#3A362E;margin-top:14px;max-width:30ch;line-height:1.55}
-.cond{list-style:none;margin-top:26px;width:100%;border-top:1px solid var(--line)}
-.cond li{border-bottom:1px solid var(--line);padding:11px 0;display:grid;grid-template-columns:26px 1fr;gap:10px;font-size:12.5px;color:#403B33}
-.cond li b{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:9px;color:#A9A294;padding-top:3px}
-.ctail{margin-top:24px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);line-height:1.9}
-.ctail b{color:var(--ink);font-weight:500}
-.seat{margin-top:22px;display:flex;align-items:center;gap:7px;font-size:9px;letter-spacing:.28em;text-transform:uppercase}
-.seat i{width:4px;height:4px;background:var(--live);border-radius:50%;display:block;animation:p 2.4s ease-in-out infinite;font-style:normal}
-.test{margin-top:26px;width:100%;max-width:290px;transition:opacity .4s,transform .4s}
-.test.gone{opacity:0;transform:translateY(-6px);pointer-events:none}
-.step{display:none}
-.step.on{display:block;animation:fade .4s ease both}
-@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
-.qrow{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-.q{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:14px;color:#3A362E;text-align:left}
-.count{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.16em;color:#B0A99B;white-space:nowrap}
-.opts{margin-top:11px;display:grid;border-top:1px solid var(--line)}
-.opt{display:flex;align-items:center;gap:10px;background:none;border:0;border-bottom:1px solid var(--line);padding:8px 4px;cursor:pointer;font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#4C473E;transition:.2s;text-align:left;width:100%}
-.opt b{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:8px;color:#B0A99B;transition:.2s}
-.opt:hover{color:var(--ink);padding-left:9px}
-.opt:hover b{color:var(--ink)}
-.opt.bad{color:var(--bad)}
-.fb{margin-top:9px;font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft);min-height:11px;text-align:left}
-.fb.good{color:var(--live)}
-.skip{display:inline-block;margin-top:7px;font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:#B0A99B;cursor:pointer;border-bottom:1px solid var(--line);padding-bottom:2px}
-.skip:hover{color:var(--ink);border-color:var(--ink)}
-.door{margin-top:26px;display:flex;align-items:center;border-bottom:1px solid var(--line);width:100%;max-width:250px;transition:border-color .35s,opacity .4s,transform .4s;opacity:0;transform:translateY(6px);pointer-events:none}
-.door.show{opacity:1;transform:none;pointer-events:auto}
-.door:focus-within{border-bottom-color:var(--ink)}
-.door input{flex:1;background:none;border:0;outline:none;color:var(--ink);font-family:'Inter',sans-serif;font-size:11.5px;padding:0 0 9px;text-align:center}
-.door input::placeholder{color:#A29B8E;letter-spacing:.16em;text-transform:uppercase;font-size:8.5px}
-.door button{background:none;border:0;color:var(--soft);cursor:pointer;font-size:12px;padding:0 0 9px 10px;transition:.25s}
-.door button:hover{color:var(--ink);transform:translateX(2px)}
-.done{display:none;margin-top:26px;padding-bottom:9px;border-bottom:1px solid var(--ink);font-size:10px;letter-spacing:.22em;text-transform:uppercase}
+.lnk{cursor:pointer;transition:.2s}.lnk:hover{color:var(--bone)}
+.wrap{max-width:700px;margin:0 auto;position:relative;z-index:2;padding:22px 26px 20px;min-height:100vh;display:flex;flex-direction:column}
+.top{display:flex;justify-content:space-between;align-items:center;padding-bottom:11px}
+.top .l{display:flex;align-items:center;gap:7px}
+.sq{width:6px;height:6px;background:var(--acid);display:block}
+.mq{border-top:1px solid var(--faint);border-bottom:1px solid var(--faint);overflow:hidden;margin:0 -26px;padding:7px 0}
+.mqin{display:flex;gap:22px;white-space:nowrap;width:max-content;animation:slide 34s linear infinite}
+.mqin span{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:#6A665E}
+.mqin span::after{content:" ✦";color:var(--acid);font-size:7px}
+@keyframes slide{to{transform:translateX(-50%)}}
+.stage{flex:1;padding:22px 0 18px}
+.word{font-family:'Inter',sans-serif;font-weight:600;font-size:13vw;line-height:.8;letter-spacing:-.045em;text-transform:uppercase;white-space:nowrap;margin-left:-.03em;display:flex;align-items:flex-end}
+.word i{font-style:normal;color:var(--acid)}
+.cur{display:inline-block;width:.06em;height:.6em;background:var(--acid);margin-left:.04em;margin-bottom:.05em;animation:blink 1.1s steps(2,end) infinite}
+@keyframes blink{50%{opacity:0}}
+.lead{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#8B867D;line-height:2;margin-top:14px;max-width:44ch}
+.lead b{color:var(--bone);font-weight:400}
+.cond{list-style:none;margin-top:20px;border-top:1px solid var(--faint)}
+.cond li{border-bottom:1px solid var(--faint);padding:9px 0;display:grid;grid-template-columns:24px 1fr;gap:10px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:#9E988E}
+.cond li b{font-weight:400;font-size:8px;color:#4F4B44;padding-top:2px}
+.cond li em{font-style:normal;color:var(--acid)}
+.tail{margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:#6A665E;line-height:2}
+.tail b{color:var(--bone);font-weight:400}
+.seat{margin-top:16px;display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone)}
+.seat i{width:3.5px;height:3.5px;background:var(--acid);border-radius:50%;display:block;animation:p 1.8s ease-in-out infinite}
+.door{margin-top:16px;display:flex;align-items:center;border-bottom:1px solid #3A3A3E;max-width:250px;transition:border-color .3s}
+.door:focus-within{border-bottom-color:var(--acid)}
+.door input{flex:1;background:none;border:0;outline:none;color:var(--bone);font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.1em;padding:0 0 8px}
+.door input::placeholder{color:#5C5850;letter-spacing:.2em;text-transform:uppercase;font-size:8.5px}
+.door button{background:none;border:0;color:var(--dim);cursor:pointer;font-size:13px;padding:0 0 8px 12px;transition:.2s}
+.door button:hover{color:var(--acid);transform:translateX(3px)}
+.done{display:none;margin-top:16px;padding-bottom:8px;border-bottom:1px solid var(--acid);font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--acid);max-width:250px}
 .done.on{display:block}
-.base{display:grid;grid-template-columns:1fr auto auto;gap:24px;align-items:flex-end;border-top:1px solid var(--line);padding-top:14px;margin-top:30px}
-.base .v{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#4C473E;display:block;margin-top:4px}
-.base a.v:hover{color:var(--ink)}.base .r{text-align:right}
-.blk{display:flex;align-items:center;gap:5px;justify-content:flex-end}
-.dot{width:3.5px;height:3.5px;background:var(--live);border-radius:50%;display:block;animation:p 2.4s ease-in-out infinite}
-@keyframes p{0%,100%{opacity:.25}50%{opacity:1}}
-.an{opacity:0;transform:translateY(5px);animation:rise 1.1s cubic-bezier(.22,.7,.2,1) forwards}
-.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--faint);border-bottom:1px solid var(--faint);margin:0 -26px}
+.cell{padding:8px 12px;border-right:1px solid var(--faint)}
+.cell:last-child{border-right:none}
+.cell .k{font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:.2em;text-transform:uppercase;color:#4F4B44}
+.cell .v{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.06em;color:#B6B0A5;margin-top:3px;display:flex;align-items:center;gap:4px}
+.pip{width:3px;height:3px;background:var(--acid);border-radius:50%;display:block;animation:p 1.8s ease-in-out infinite}
+@keyframes p{0%,100%{opacity:.2}50%{opacity:1}}
+.base{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:flex-end;padding-top:11px}
+.base .v{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#B6B0A5;display:block;margin-top:4px}
+.base a.v:hover{color:var(--bone)}.base .r{text-align:right}
+.an{opacity:0;transform:translateY(9px);animation:rise 1.05s cubic-bezier(.2,.75,.2,1) forwards}
+.d1{animation-delay:.05s}.d2{animation-delay:.2s}.d3{animation-delay:.34s}.d4{animation-delay:.5s}
 @keyframes rise{to{opacity:1;transform:none}}
-@media (max-width:480px){.sheet{padding:44px 26px 38px}.frame{inset:12px}.base{gap:14px}}
-@media (prefers-reduced-motion:reduce){.an{opacity:1;transform:none;animation:none}.dot,.seat i{animation:none}.step.on{animation:none}}
+@media (max-width:480px){.wrap{padding:18px 16px 16px}.mq,.grid{margin:0 -16px}.cell{padding:7px 8px}}
+@media (prefers-reduced-motion:reduce){.an{opacity:1;transform:none;animation:none}.pip,.mqin,.cur,.seat i{animation:none}}
 </style>
 </head>
 <body>
-<div class="frame"></div>
-<div class="sheet">
-  <div class="top"><a href="/" class="cap lnk">← Nifty</a><span class="cap">Careers</span></div>
-  <div class="core">
-    <h1 class="ctitle an d1">We hire rarely.</h1>
-    <p class="clead an d1">Only at the top of the market, and only when the seat is earned twice — once by the work, once by the room.</p>
-    <ul class="cond an d2">
+<div class="wrap">
+  <div class="top an d1">
+    <a href="/" class="l cap lnk"><span class="sq"></span>Nifty Inc.</a>
+    <span class="cap">Careers</span>
+  </div>
+
+  <div class="mq"><div class="mqin">
+    <span>By referral</span><span>No take-home</span><span>Three conversations</span><span>One uncomfortable</span><span>No salary bands</span><span>Trial by room</span>
+    <span>By referral</span><span>No take-home</span><span>Three conversations</span><span>One uncomfortable</span><span>No salary bands</span><span>Trial by room</span>
+  </div></div>
+
+  <div class="stage">
+    <h1 class="word an d2">Career<i>s</i><span class="cur"></span></h1>
+    <p class="lead an d2">We hire <b>rarely.</b> Only at the top of the market, and only when the seat is earned twice — once by the work, once by the room.</p>
+
+    <ul class="cond an d3">
       <li><b>01</b><span>A body of work you'd defend in public.</span></li>
       <li><b>02</b><span>References we can't buy.</span></li>
       <li><b>03</b><span>Taste, and the discipline to argue for it.</span></li>
-      <li><b>04</b><span>Two years minimum somewhere it mattered.</span></li>
+      <li><b>04</b><span>Two years minimum somewhere it <em>mattered</em>.</span></li>
     </ul>
-    <p class="ctail an d2">Three conversations. <b>One of them uncomfortable.</b><br>No take-home. No salary bands until the third.</p>
-    <div class="seat an d2"><i></i>No seat open — register interest</div>
 
-    <div class="test an d3" id="test">
-      <div class="step on" id="s1">
-        <div class="qrow"><p class="q">How many of three conversations are uncomfortable?</p><span class="count">01 / 02</span></div>
-        <div class="opts">
-          <button class="opt" data-ok="1"><b>A</b><span>One</span></button>
-          <button class="opt" data-ok="0"><b>B</b><span>Two</span></button>
-          <button class="opt" data-ok="0"><b>C</b><span>Three</span></button>
-        </div>
-        <p class="fb" id="fb1"></p>
-        <span class="skip" data-to="s2">Skip →</span>
-      </div>
-      <div class="step" id="s2">
-        <div class="qrow"><p class="q">No take-home. Instead?</p><span class="count">02 / 02</span></div>
-        <div class="opts">
-          <button class="opt" data-ok="0"><b>A</b><span>A portfolio</span></button>
-          <button class="opt" data-ok="1"><b>B</b><span>Three conversations</span></button>
-          <button class="opt" data-ok="0"><b>C</b><span>A trial day</span></button>
-        </div>
-        <p class="fb" id="fb2"></p>
-        <span class="skip" data-to="door">Skip →</span>
-      </div>
-    </div>
+    <p class="tail an d3">Three conversations. <b>One of them uncomfortable.</b><br>No salary bands until the third.</p>
+    <div class="seat an d3"><i></i>No seat open — register interest</div>
 
-    <div class="door" id="door"><input id="mail" placeholder="address" aria-label="Email"><button id="go" aria-label="Send">→</button></div>
+    <div class="door an d4" id="door"><input id="mail" placeholder="address" aria-label="Email"><button id="go" aria-label="Send">→</button></div>
     <div class="done" id="done">Received. Silence means no.</div>
-    <noscript><p class="cap" style="margin-top:18px"><a href="mailto:office@niftyinc.io">office@niftyinc.io</a></p></noscript>
+    <noscript><p class="cap" style="margin-top:14px"><a href="mailto:office@niftyinc.io">office@niftyinc.io</a></p></noscript>
   </div>
-  <div class="base">
+
+  <div class="grid an d4">
+    <div class="cell"><span class="k">Open</span><span class="v">0</span></div>
+    <div class="cell"><span class="k">Rounds</span><span class="v">3</span></div>
+    <div class="cell"><span class="k">Block</span><span class="v"><span class="pip"></span><span id="blk">24,318,407</span></span></div>
+    <div class="cell"><span class="k">London</span><span class="v" id="t">--:--</span></div>
+  </div>
+
+  <div class="base an d4">
     <div><span class="cap">Careers</span><a href="mailto:office@niftyinc.io" class="v">office@niftyinc.io</a></div>
-    <div class="r"><span class="cap">Block</span><span class="v mono blk"><span class="dot"></span><span id="blk">24,318,407</span></span></div>
-    <div class="r"><span class="cap">London W1</span><span class="v mono" id="t">--:--</span></div>
+    <div class="r"><span class="cap">Desk</span><a href="https://t.me/niftyinc" class="v">@niftyinc</a></div>
   </div>
 </div>
 <script>
 function tick(){document.getElementById('t').textContent=new Date().toLocaleTimeString('en-GB',{timeZone:'Europe/London',hour:'2-digit',minute:'2-digit',hour12:false})}
 tick();setInterval(tick,15000);
 var b=24318407;setInterval(function(){b++;document.getElementById('blk').textContent=b.toLocaleString('en-GB')},12000);
-function openDoor(){document.getElementById('test').classList.add('gone');setTimeout(function(){document.getElementById('door').classList.add('show');document.getElementById('mail').focus()},260)}
-function next(id){document.querySelectorAll('.step').forEach(function(s){s.classList.remove('on')});document.getElementById(id).classList.add('on')}
-document.querySelectorAll('#s1 .opt').forEach(function(o){o.onclick=function(){if(o.dataset.ok==='1'){document.getElementById('fb1').textContent='Correct.';document.getElementById('fb1').classList.add('good');setTimeout(function(){next('s2')},300)}else{o.classList.add('bad');document.getElementById('fb1').textContent='Read it again.'}}});
-document.querySelectorAll('#s2 .opt').forEach(function(o){o.onclick=function(){if(o.dataset.ok==='1'){document.getElementById('fb2').textContent='Correct.';document.getElementById('fb2').classList.add('good');setTimeout(openDoor,320)}else{o.classList.add('bad');document.getElementById('fb2').textContent='Read it again.'}}});
-document.querySelectorAll('.skip').forEach(function(s){s.onclick=function(){s.dataset.to==='door'?openDoor():next(s.dataset.to)}});
-document.getElementById('go').onclick=function(){var v=document.getElementById('mail').value.trim();if(!v)return document.getElementById('mail').focus();location.href='mailto:office@niftyinc.io?subject=Application&body='+encodeURIComponent('Address: '+v+'\n\n');document.getElementById('door').classList.remove('show');document.getElementById('done').classList.add('on')};
+document.getElementById('go').onclick=function(){
+  var v=document.getElementById('mail').value.trim();
+  if(!v)return document.getElementById('mail').focus();
+  location.href='mailto:office@niftyinc.io?subject=Application&body='+encodeURIComponent('Address: '+v+'\n\n');
+  document.getElementById('door').style.display='none';document.getElementById('done').classList.add('on');
+};
 document.getElementById('mail').onkeydown=function(e){if(e.key==='Enter')document.getElementById('go').click()};
 </script>
 </body>
